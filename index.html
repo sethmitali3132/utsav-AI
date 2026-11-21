@@ -1,0 +1,4939 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utsav AI — Plan Your Perfect Event with AI</title>
+    <meta
+      name="description"
+      content="AI-powered event and wedding planner with Shubh, your intelligent planning companion. Enter your budget, guests and date, and Shubh handles the rest."
+    />
+    <meta property="og:title" content="Utsav AI — Plan Your Perfect Event with AI" />
+    <meta
+      property="og:description"
+      content="Enter your budget, guests and date. Shubh, your AI planner, handles the rest."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* =====================================================================
+         UTSAV AI — DESIGN TOKENS & BASE RESET
+         ===================================================================== */
+      :root {
+        --marigold: #e8a317;
+        --marigold-hover: #d18f0c;
+        --marigold-soft: #fdf3dc;
+        --marigold-text: #8c5a00;
+        --maroon: #7a1f3d;
+        --maroon-hover: #621730;
+        --maroon-soft: rgba(122, 31, 61, 0.08);
+        --blush: #f8e1e7;
+        --blush-soft: #fdf2f5;
+        --ivory: #fffbf5;
+        --surface: #ffffff;
+        --text: #2b2024;
+        --text-muted: #66555b;
+        --text-subtle: #8a777d;
+        --danger: #b42318;
+        --danger-soft: #fef3f2;
+        --border-hairline: rgba(122, 31, 61, 0.14);
+        --border-dashed: rgba(122, 31, 61, 0.25);
+        --radius-card: 16px;
+        --radius-sm: 10px;
+        --radius-pill: 999px;
+        --shadow-soft: 0 12px 32px -12px rgba(43, 32, 36, 0.08),
+          0 2px 6px -1px rgba(43, 32, 36, 0.04);
+        --shadow-hover: 0 20px 40px -14px rgba(122, 31, 61, 0.14),
+          0 4px 12px -2px rgba(43, 32, 36, 0.06);
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          sans-serif;
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text);
+        background-color: var(--ivory);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        font-family: var(--font-display);
+        color: var(--text);
+        font-weight: 600;
+        line-height: 1.18;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: inherit;
+      }
+
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+        color: var(--text);
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid var(--maroon);
+        outline-offset: 2px;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .tabular-nums {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .is-hidden {
+        display: none !important;
+      }
+
+      /* =====================================================================
+         BUTTONS
+         ===================================================================== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.2;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: transform 180ms var(--ease-out),
+          background-color 180ms var(--ease-out),
+          box-shadow 180ms var(--ease-out),
+          border-color 180ms var(--ease-out);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        background-color: var(--maroon);
+        color: #ffffff;
+        box-shadow: 0 8px 20px -8px rgba(122, 31, 61, 0.55);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--maroon-hover);
+        transform: translateY(-1px);
+      }
+
+      .btn-marigold {
+        background-color: var(--marigold);
+        color: #2b2024;
+        box-shadow: 0 8px 20px -8px rgba(232, 163, 23, 0.55);
+      }
+
+      .btn-marigold:hover {
+        background-color: var(--marigold-hover);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background-color: var(--surface);
+        color: var(--maroon);
+        border: 1px solid var(--border-hairline);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--blush-soft);
+        border-color: rgba(122, 31, 61, 0.28);
+        transform: translateY(-1px);
+      }
+
+      .btn-ghost {
+        background-color: transparent;
+        color: var(--text-muted);
+        padding: 10px 16px;
+      }
+
+      .btn-ghost:hover {
+        color: var(--maroon);
+        background-color: var(--blush-soft);
+      }
+
+      .btn-sm {
+        padding: 9px 18px;
+        font-size: 14px;
+        border-radius: 10px;
+      }
+
+      /* =====================================================================
+         SHARED HERO BACKGROUND & MOTIF
+         ===================================================================== */
+      .hero-backdrop {
+        background: radial-gradient(
+            circle at 85% 18%,
+            rgba(248, 225, 231, 0.72) 0%,
+            rgba(248, 225, 231, 0) 45%
+          ),
+          radial-gradient(
+            circle at 12% 82%,
+            rgba(232, 163, 23, 0.14) 0%,
+            rgba(232, 163, 23, 0) 42%
+          ),
+          var(--ivory);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-motif {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.9;
+      }
+
+      /* =====================================================================
+         VIEW 1 — STICKY NAVBAR & MOBILE DRAWER
+         ===================================================================== */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background-color: rgba(255, 251, 245, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .navbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        height: 72px;
+      }
+
+      .brand-wordmark {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--maroon);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        white-space: nowrap;
+        flex-shrink: 0;
+        position: relative;
+        padding: 6px 0;
+        transition: color 160ms var(--ease-out);
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2px;
+        height: 1.5px;
+        background-color: var(--marigold);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 200ms var(--ease-out);
+      }
+
+      .nav-link:hover {
+        color: var(--maroon);
+      }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+      }
+
+      .hamburger-btn {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        color: var(--maroon);
+        border: 1px solid var(--border-hairline);
+        background-color: var(--surface);
+      }
+
+      .mobile-drawer {
+        display: none;
+        background-color: var(--ivory);
+        border-bottom: 1px solid var(--border-hairline);
+        padding: 16px 24px 24px;
+      }
+
+      .mobile-drawer.is-open {
+        display: block;
+      }
+
+      .mobile-drawer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .mobile-drawer-links a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .mobile-drawer-links a:hover {
+        background-color: var(--blush-soft);
+        color: var(--maroon);
+      }
+
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+        }
+        .nav-desktop-cta {
+          display: none;
+        }
+        .hamburger-btn {
+          display: inline-flex;
+        }
+      }
+
+      /* =====================================================================
+         VIEW 1 — HERO SECTION
+         ===================================================================== */
+      .hero {
+        min-height: calc(100vh - 72px);
+        display: flex;
+        align-items: center;
+        padding: 64px 0 80px;
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--maroon);
+        margin-bottom: 18px;
+      }
+
+      .hero-kicker-line {
+        width: 28px;
+        height: 2px;
+        background-color: var(--marigold);
+        border-radius: 2px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.4rem, 4.4vw, 4rem);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        text-wrap: balance;
+        max-width: 15ch;
+        margin-bottom: 20px;
+      }
+
+      .hero-title em {
+        font-style: italic;
+        color: var(--maroon);
+      }
+
+      .hero-subtext {
+        font-size: clamp(1rem, 1.3vw, 1.15rem);
+        line-height: 1.65;
+        color: var(--text-muted);
+        max-width: 48ch;
+        margin-bottom: 32px;
+      }
+
+      .hero-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 40px;
+      }
+
+      .hero-meta-strip {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px 18px;
+        font-size: 13px;
+        color: var(--text-muted);
+        padding-top: 24px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .hero-meta-sep {
+        color: var(--marigold-text);
+        font-weight: 600;
+      }
+
+      .hero-card {
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border-hairline);
+        padding: 28px;
+        position: relative;
+      }
+
+      .hero-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--border-hairline);
+        margin-bottom: 20px;
+      }
+
+      .hero-card-event {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+
+      .hero-card-meta {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .hero-card-countdown {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--maroon);
+        background-color: var(--blush);
+        padding: 6px 12px;
+        border-radius: var(--radius-pill);
+        white-space: nowrap;
+      }
+
+      .hero-plan-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      .hero-plan-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        background-color: var(--ivory);
+        border-radius: 12px;
+      }
+
+      .hero-plan-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .hero-plan-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      .hero-plan-stat {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--maroon);
+        white-space: nowrap;
+      }
+
+      .hero-shubh-note {
+        padding: 16px;
+        border-radius: 12px;
+        background-color: var(--blush-soft);
+        border: 1px solid rgba(122, 31, 61, 0.14);
+      }
+
+      .hero-shubh-author {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--maroon);
+        margin-bottom: 6px;
+      }
+
+      .hero-shubh-quote {
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: var(--text);
+      }
+
+      @media (max-width: 960px) {
+        .hero {
+          min-height: auto;
+          padding: 48px 0 64px;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .hero-title {
+          max-width: 18ch;
+        }
+      }
+
+      /* =====================================================================
+         VIEW 1 — CONTENT SECTIONS
+         ===================================================================== */
+      .section {
+        padding: 88px 0;
+      }
+
+      .section-tinted {
+        background-color: var(--surface);
+        border-top: 1px solid var(--border-hairline);
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .section-blush {
+        background-color: var(--blush-soft);
+        border-top: 1px solid var(--border-hairline);
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .section-header {
+        max-width: 660px;
+        margin-bottom: 48px;
+      }
+
+      .section-header.centered {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .section-kicker {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--maroon);
+        margin-bottom: 10px;
+      }
+
+      .section-title {
+        font-size: clamp(1.85rem, 3vw, 2.5rem);
+        letter-spacing: -0.015em;
+        text-wrap: balance;
+        margin-bottom: 14px;
+      }
+
+      .section-desc {
+        font-size: 16px;
+        color: var(--text-muted);
+        line-height: 1.65;
+      }
+
+      @media (max-width: 768px) {
+        .section {
+          padding: 64px 0;
+        }
+        .section-header {
+          margin-bottom: 36px;
+        }
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .feature-card {
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        padding: 28px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border-hairline);
+        transition: transform 200ms var(--ease-out),
+          box-shadow 200ms var(--ease-out);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background-color: var(--marigold-soft);
+        color: var(--maroon);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+
+      .feature-title {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .feature-copy {
+        font-size: 14.5px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      @media (max-width: 960px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .steps-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .step-card {
+        background-color: var(--ivory);
+        border-radius: var(--radius-card);
+        padding: 26px 24px;
+        border: 1px solid var(--border-hairline);
+        transition: transform 200ms var(--ease-out),
+          border-color 200ms var(--ease-out);
+      }
+
+      .step-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(122, 31, 61, 0.28);
+      }
+
+      .step-num {
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--marigold-text);
+        margin-bottom: 12px;
+      }
+
+      .step-title {
+        font-family: var(--font-display);
+        font-size: 19px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .step-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      @media (max-width: 960px) {
+        .steps-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .steps-strip {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .chips-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .event-chip {
+        padding: 11px 22px;
+        border-radius: var(--radius-pill);
+        background-color: var(--surface);
+        border: 1px solid var(--border-hairline);
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--text);
+        box-shadow: 0 4px 12px -6px rgba(43, 32, 36, 0.08);
+        transition: background-color 180ms var(--ease-out),
+          color 180ms var(--ease-out),
+          border-color 180ms var(--ease-out),
+          transform 180ms var(--ease-out);
+        white-space: nowrap;
+      }
+
+      .event-chip:hover {
+        border-color: var(--maroon);
+        color: var(--maroon);
+        transform: translateY(-2px);
+      }
+
+      .event-chip.is-active {
+        background-color: var(--maroon);
+        border-color: var(--maroon);
+        color: #ffffff;
+      }
+
+      .event-preview-panel {
+        max-width: 780px;
+        margin: 0 auto;
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border-hairline);
+        padding: 26px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .event-preview-title {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .event-preview-copy {
+        font-size: 14.5px;
+        color: var(--text-muted);
+      }
+
+      @media (max-width: 680px) {
+        .event-preview-panel {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .pricing-card {
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        padding: 32px 28px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border-hairline);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 200ms var(--ease-out),
+          box-shadow 200ms var(--ease-out);
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .pricing-card.is-featured {
+        border: 2px solid var(--maroon);
+        background: linear-gradient(
+          180deg,
+          rgba(248, 225, 231, 0.35) 0%,
+          #ffffff 36%
+        );
+      }
+
+      .pricing-tier-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .pricing-tier-name {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .pricing-recommended {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--maroon);
+      }
+
+      .pricing-audience {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+      }
+
+      .pricing-amount {
+        font-family: var(--font-display);
+        font-size: 38px;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.1;
+        margin-bottom: 4px;
+      }
+
+      .pricing-cadence {
+        font-size: 13px;
+        color: var(--text-muted);
+        padding-bottom: 22px;
+        margin-bottom: 22px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .pricing-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .pricing-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      .pricing-check {
+        color: var(--maroon);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      @media (max-width: 960px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          max-width: 460px;
+          margin: 0 auto;
+        }
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .testimonial-card {
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        padding: 28px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border-hairline);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 24px;
+        transition: transform 200ms var(--ease-out);
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .testimonial-quote {
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--text);
+      }
+
+      .testimonial-author {
+        padding-top: 16px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .testimonial-name {
+        font-family: var(--font-display);
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .testimonial-role {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      @media (max-width: 960px) {
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .cta-banner {
+        background: linear-gradient(135deg, var(--maroon) 0%, #57142a 100%);
+        border-radius: var(--radius-card);
+        padding: 56px 48px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        box-shadow: var(--shadow-hover);
+      }
+
+      .cta-banner-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 3vw, 2.4rem);
+        color: #ffffff;
+        margin-bottom: 10px;
+        text-wrap: balance;
+      }
+
+      .cta-banner-sub {
+        font-size: 16px;
+        color: var(--blush);
+        max-width: 52ch;
+      }
+
+      @media (max-width: 800px) {
+        .cta-banner {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 40px 28px;
+        }
+      }
+
+      .footer {
+        background-color: var(--surface);
+        border-top: 1px solid var(--border-hairline);
+        padding: 64px 0 36px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .footer-brand-copy {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-top: 12px;
+        max-width: 30ch;
+      }
+
+      .footer-col-title {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 14px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .footer-links a,
+      .footer-links button {
+        font-size: 14px;
+        color: var(--text-muted);
+        text-align: left;
+        padding: 0;
+        transition: color 160ms var(--ease-out);
+      }
+
+      .footer-links a:hover,
+      .footer-links button:hover {
+        color: var(--maroon);
+      }
+
+      .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 24px;
+        font-size: 13px;
+        color: var(--text-subtle);
+      }
+
+      @media (max-width: 900px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 540px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 550ms var(--ease-out),
+          transform 550ms var(--ease-out);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      /* =====================================================================
+         LOGIN SCREEN (#view-login)
+         ===================================================================== */
+      .login-screen {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px;
+      }
+
+      .login-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 440px;
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-hover);
+        border: 1px solid var(--border-hairline);
+        padding: 40px 34px;
+        text-align: center;
+      }
+
+      .login-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--maroon);
+        margin-bottom: 8px;
+      }
+
+      .login-tagline {
+        font-size: 15px;
+        color: var(--text-muted);
+        margin-bottom: 28px;
+      }
+
+      .login-divider {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 18px 0;
+        font-size: 12.5px;
+        color: var(--text-subtle);
+      }
+
+      .login-divider::before,
+      .login-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background-color: var(--border-hairline);
+      }
+
+      .btn-google {
+        width: 100%;
+        background-color: var(--surface);
+        color: var(--text);
+        border: 1px solid rgba(43, 32, 36, 0.18);
+        padding: 13px 20px;
+        box-shadow: 0 4px 12px -6px rgba(43, 32, 36, 0.12);
+      }
+
+      .btn-google:hover {
+        background-color: var(--ivory);
+        border-color: var(--maroon);
+        transform: translateY(-1px);
+      }
+
+      .google-signin-panel {
+        margin-top: 18px;
+        padding: 20px;
+        border-radius: 14px;
+        background-color: var(--ivory);
+        border: 1px solid var(--border-hairline);
+        text-align: left;
+      }
+
+      .google-signin-header {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--maroon);
+        margin-bottom: 4px;
+      }
+
+      .google-signin-sub {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+      }
+
+      .login-back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 24px;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      .login-back-link:hover {
+        color: var(--maroon);
+      }
+
+      /* =====================================================================
+         FORM PRIMITIVES & EVENT SETUP WIZARD (#view-wizard)
+         ===================================================================== */
+      .wizard-screen {
+        min-height: 100vh;
+        padding: 36px 20px 64px;
+      }
+
+      .wizard-shell {
+        position: relative;
+        z-index: 1;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      .wizard-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .wizard-user-label {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .wizard-card {
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border-hairline);
+        padding: 36px;
+      }
+
+      @media (max-width: 640px) {
+        .wizard-card {
+          padding: 24px 18px;
+        }
+      }
+
+      /* 4-Step Progress Bar */
+      .wizard-progress {
+        margin-bottom: 30px;
+      }
+
+      .wizard-progress-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--maroon);
+      }
+
+      .wizard-progress-track {
+        height: 8px;
+        border-radius: var(--radius-pill);
+        background-color: var(--blush);
+        overflow: hidden;
+      }
+
+      .wizard-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--maroon) 0%, var(--marigold) 100%);
+        border-radius: var(--radius-pill);
+        transition: width 280ms var(--ease-out);
+      }
+
+      .wizard-steps-labels {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .wizard-step-label {
+        font-size: 12px;
+        color: var(--text-subtle);
+        text-align: center;
+      }
+
+      .wizard-step-label.is-active {
+        color: var(--maroon);
+        font-weight: 600;
+      }
+
+      .wizard-step-label.is-done {
+        color: var(--marigold-text);
+        font-weight: 500;
+      }
+
+      .wizard-heading {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        margin-bottom: 6px;
+      }
+
+      .wizard-sub {
+        font-size: 14.5px;
+        color: var(--text-muted);
+        margin-bottom: 26px;
+      }
+
+      .field-group {
+        margin-bottom: 22px;
+      }
+
+      .field-label {
+        display: block;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+
+      .field-hint {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        margin-top: 6px;
+      }
+
+      .field-error {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--danger);
+        background-color: var(--danger-soft);
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-top: 8px;
+      }
+
+      .input,
+      .select,
+      .textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border-hairline);
+        background-color: var(--ivory);
+        font-size: 14.5px;
+        transition: border-color 160ms var(--ease-out),
+          background-color 160ms var(--ease-out);
+      }
+
+      .input:focus,
+      .select:focus,
+      .textarea:focus {
+        border-color: var(--maroon);
+        background-color: var(--surface);
+      }
+
+      .textarea {
+        min-height: 92px;
+        resize: vertical;
+      }
+
+      .two-col-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 640px) {
+        .two-col-fields {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Selectable Option Cards & Chips in Wizard */
+      .option-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+        gap: 10px;
+      }
+
+      .option-card {
+        padding: 13px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border-hairline);
+        background-color: var(--ivory);
+        text-align: left;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        transition: border-color 160ms var(--ease-out),
+          background-color 160ms var(--ease-out),
+          color 160ms var(--ease-out);
+      }
+
+      .option-card:hover {
+        border-color: var(--maroon);
+        background-color: var(--blush-soft);
+      }
+
+      .option-card.is-selected {
+        background-color: var(--maroon);
+        border-color: var(--maroon);
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      .select-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .select-chip {
+        padding: 9px 16px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--border-hairline);
+        background-color: var(--ivory);
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 160ms var(--ease-out);
+      }
+
+      .select-chip:hover {
+        border-color: var(--maroon);
+        color: var(--maroon);
+      }
+
+      .select-chip.is-selected {
+        background-color: var(--maroon);
+        border-color: var(--maroon);
+        color: #ffffff;
+      }
+
+      .priority-rank-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        border-radius: var(--radius-pill);
+        background-color: var(--marigold);
+        color: #2b2024;
+        font-size: 11.5px;
+        font-weight: 700;
+      }
+
+      /* Live Metrics Bar in Wizard */
+      .live-stat-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        background-color: var(--blush-soft);
+        border: 1px solid rgba(122, 31, 61, 0.16);
+        margin-top: 12px;
+      }
+
+      .live-stat-label {
+        font-size: 13.5px;
+        color: var(--text-muted);
+      }
+
+      .live-stat-value {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--maroon);
+      }
+
+      /* Range Slider */
+      .range-row {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        gap: 16px;
+        align-items: center;
+      }
+
+      @media (max-width: 560px) {
+        .range-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      input[type='range'] {
+        width: 100%;
+        accent-color: var(--maroon);
+        cursor: pointer;
+        height: 6px;
+      }
+
+      .wizard-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-top: 24px;
+        margin-top: 28px;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      /* Summary & Donut Chart */
+      .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      @media (max-width: 760px) {
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .summary-details {
+        background-color: var(--ivory);
+        border-radius: 14px;
+        border: 1px solid var(--border-hairline);
+        padding: 20px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--border-hairline);
+        font-size: 13.5px;
+      }
+
+      .summary-row:last-child {
+        border-bottom: none;
+      }
+
+      .summary-key {
+        color: var(--text-muted);
+        flex-shrink: 0;
+      }
+
+      .summary-val {
+        font-weight: 600;
+        color: var(--text);
+        text-align: right;
+      }
+
+      .donut-card {
+        background-color: var(--ivory);
+        border-radius: 14px;
+        border: 1px solid var(--border-hairline);
+        padding: 20px;
+      }
+
+      .donut-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .donut-legend {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .donut-legend-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 13px;
+      }
+
+      .donut-legend-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .donut-swatch {
+        width: 11px;
+        height: 11px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+
+      .donut-legend-right {
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+      }
+
+      /* =====================================================================
+         VIEW 2 — APP SHELL
+         ===================================================================== */
+      .app-shell {
+        min-height: 100vh;
+        display: flex;
+        background-color: var(--ivory);
+      }
+
+      .app-sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        background-color: var(--surface);
+        border-right: 1px solid var(--border-hairline);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px 16px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
+
+      .sidebar-brand {
+        padding: 4px 12px 20px;
+        border-bottom: 1px solid var(--border-hairline);
+        margin-bottom: 16px;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .sidebar-tab {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 12px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--text-muted);
+        white-space: nowrap;
+        transition: background-color 160ms var(--ease-out),
+          color 160ms var(--ease-out);
+      }
+
+      .sidebar-tab:hover {
+        background-color: var(--blush-soft);
+        color: var(--maroon);
+      }
+
+      .sidebar-tab.is-active {
+        background-color: var(--maroon);
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      .sidebar-footer {
+        padding-top: 16px;
+        border-top: 1px solid var(--border-hairline);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .sidebar-user-box {
+        padding: 8px 12px 12px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .sidebar-user-name {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .sidebar-user-email {
+        font-size: 12px;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .back-home-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text-muted);
+        transition: background-color 160ms var(--ease-out),
+          color 160ms var(--ease-out);
+      }
+
+      .back-home-btn:hover {
+        background-color: var(--ivory);
+        color: var(--maroon);
+      }
+
+      .app-main {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .app-topbar {
+        height: 72px;
+        background-color: var(--surface);
+        border-bottom: 1px solid var(--border-hairline);
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+
+      .app-topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .app-event-name {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .app-topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .countdown-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 14px;
+        border-radius: var(--radius-pill);
+        background-color: var(--blush);
+        color: var(--maroon);
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .bell-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid var(--border-hairline);
+        background-color: var(--ivory);
+        color: var(--maroon);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: background-color 160ms var(--ease-out);
+      }
+
+      .bell-btn:hover {
+        background-color: var(--blush-soft);
+      }
+
+      .bell-popover {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 310px;
+        background-color: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-hover);
+        border: 1px solid var(--border-hairline);
+        padding: 18px;
+        z-index: 50;
+      }
+
+      .bell-popover-title {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .bell-item {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-hairline);
+        font-size: 13.5px;
+      }
+
+      .bell-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .bell-item-time {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      .mobile-back-btn {
+        display: none;
+        padding: 7px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border-hairline);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--maroon);
+        white-space: nowrap;
+      }
+
+      .app-content {
+        padding: 32px;
+        max-width: 1180px;
+        width: 100%;
+      }
+
+      .tab-panel {
+        display: none;
+      }
+
+      .tab-panel.is-active {
+        display: block;
+      }
+
+      .tab-header-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .tab-header {
+        margin-bottom: 28px;
+      }
+
+      .tab-title {
+        font-size: 30px;
+        margin-bottom: 6px;
+      }
+
+      .tab-subtitle {
+        font-size: 14.5px;
+        color: var(--text-muted);
+      }
+
+      .placeholder-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+      }
+
+      .placeholder-box {
+        background-color: var(--surface);
+        border: 2px dashed var(--border-dashed);
+        border-radius: var(--radius-card);
+        padding: 26px 24px;
+        min-height: 170px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 14px;
+        transition: border-color 180ms var(--ease-out),
+          background-color 180ms var(--ease-out);
+      }
+
+      .placeholder-box:hover {
+        border-color: var(--maroon);
+        background-color: rgba(248, 225, 231, 0.16);
+      }
+
+      .placeholder-box-title {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--maroon);
+        margin-bottom: 6px;
+      }
+
+      .placeholder-box-desc {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.55;
+      }
+
+      .placeholder-live-val {
+        font-family: var(--font-display);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 8px 0 4px;
+      }
+
+      .placeholder-box-meta {
+        font-size: 12.5px;
+        font-weight: 500;
+        color: var(--text-subtle);
+      }
+
+      .mini-split-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .mini-split-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .span-4 {
+        grid-column: span 4;
+      }
+      .span-6 {
+        grid-column: span 6;
+      }
+      .span-7 {
+        grid-column: span 7;
+      }
+      .span-5 {
+        grid-column: span 5;
+      }
+      .span-12 {
+        grid-column: span 12;
+      }
+
+      .mobile-bottom-nav {
+        display: none;
+      }
+
+      @media (max-width: 900px) {
+        .app-sidebar {
+          display: none;
+        }
+        .mobile-back-btn {
+          display: inline-flex;
+        }
+        .app-topbar {
+          padding: 0 16px;
+          height: 64px;
+        }
+        .app-event-name {
+          font-size: 17px;
+        }
+        .app-content {
+          padding: 24px 16px 96px;
+        }
+        .span-4,
+        .span-5,
+        .span-6,
+        .span-7 {
+          grid-column: span 12;
+        }
+        .mobile-bottom-nav {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 40;
+          background-color: var(--surface);
+          border-top: 1px solid var(--border-hairline);
+          padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+          box-shadow: 0 -6px 20px -8px rgba(43, 32, 36, 0.1);
+        }
+        .mobile-tab-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          padding: 6px 2px;
+          border-radius: 10px;
+          font-size: 11px;
+          font-weight: 500;
+          color: var(--text-muted);
+          min-height: 48px;
+          white-space: nowrap;
+        }
+        .mobile-tab-btn.is-active {
+          color: var(--maroon);
+          background-color: var(--blush-soft);
+          font-weight: 600;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===================================================================
+         VIEW 1 — LANDING PAGE
+         =================================================================== -->
+    <div id="view-landing">
+      <header class="navbar">
+        <div class="container navbar-inner">
+          <a href="#top" class="brand-wordmark" aria-label="Utsav AI Home">
+            <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <circle cx="14" cy="14" r="13" fill="#E8A317" fill-opacity="0.18" />
+              <path
+                d="M14 4.5C15.9 8.2 18.6 10.6 22.5 12C18.6 13.4 15.9 15.8 14 19.5C12.1 15.8 9.4 13.4 5.5 12C9.4 10.6 12.1 8.2 14 4.5Z"
+                fill="#7A1F3D"
+              />
+              <circle cx="14" cy="12" r="2.2" fill="#E8A317" />
+              <path
+                d="M9 21.5C11.2 22.8 16.8 22.8 19 21.5"
+                stroke="#E8A317"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>Utsav AI</span>
+          </a>
+
+          <nav class="nav-links" aria-label="Primary Navigation">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#how-it-works" class="nav-link">How It Works</a>
+            <a href="#event-types" class="nav-link">Celebrations</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#testimonials" class="nav-link">Stories</a>
+          </nav>
+
+          <div class="nav-actions">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm nav-desktop-cta js-start-planning"
+            >
+              Start Planning
+            </button>
+            <button
+              type="button"
+              id="hamburger-btn"
+              class="hamburger-btn"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="mobile-drawer"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <line x1="4" y1="7" x2="20" y2="7"></line>
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="17" x2="20" y2="17"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+          <div class="mobile-drawer-links">
+            <a href="#features" class="js-drawer-link">Features</a>
+            <a href="#how-it-works" class="js-drawer-link">How It Works</a>
+            <a href="#event-types" class="js-drawer-link">Celebrations</a>
+            <a href="#pricing" class="js-drawer-link">Pricing</a>
+            <a href="#testimonials" class="js-drawer-link">Stories</a>
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary js-start-planning"
+            style="width: 100%"
+          >
+            Start Planning
+          </button>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero hero-backdrop">
+          <svg
+            class="hero-motif"
+            viewBox="0 0 1440 820"
+            fill="none"
+            preserveAspectRatio="xMidYMid slice"
+            aria-hidden="true"
+          >
+            <path
+              d="M-40 90 C 180 210, 420 60, 620 140"
+              stroke="#E8A317"
+              stroke-opacity="0.24"
+              stroke-width="1.5"
+              stroke-dasharray="6 8"
+            />
+            <g transform="translate(120, 128)" opacity="0.28">
+              <circle cx="0" cy="0" r="14" fill="#E8A317" />
+              <circle cx="0" cy="0" r="6" fill="#7A1F3D" />
+            </g>
+            <g transform="translate(340, 118)" opacity="0.22">
+              <circle cx="0" cy="0" r="10" fill="#E8A317" />
+              <circle cx="0" cy="0" r="4" fill="#FFFBF5" />
+            </g>
+            <path
+              d="M1190 95 C1205 80, 1228 95, 1212 115 C1196 125, 1180 110, 1190 95 Z"
+              fill="#E8A317"
+              fill-opacity="0.24"
+            />
+            <path
+              d="M1320 220 C1336 206, 1356 224, 1340 242 C1324 252, 1310 236, 1320 220 Z"
+              fill="#7A1F3D"
+              fill-opacity="0.14"
+            />
+            <path
+              d="M840 690 C855 676, 875 692, 860 710 C845 720, 830 704, 840 690 Z"
+              fill="#E8A317"
+              fill-opacity="0.28"
+            />
+            <rect
+              x="710"
+              y="130"
+              width="12"
+              height="6"
+              rx="3"
+              transform="rotate(-24 710 130)"
+              fill="#7A1F3D"
+              fill-opacity="0.18"
+            />
+            <rect
+              x="1280"
+              y="620"
+              width="14"
+              height="6"
+              rx="3"
+              transform="rotate(32 1280 620)"
+              fill="#E8A317"
+              fill-opacity="0.32"
+            />
+            <circle cx="660" cy="640" r="5" fill="#7A1F3D" fill-opacity="0.16" />
+            <circle cx="1365" cy="430" r="6" fill="#E8A317" fill-opacity="0.26" />
+            <circle cx="95" cy="590" r="7" fill="#7A1F3D" fill-opacity="0.14" />
+            <g transform="translate(1240, 690)" opacity="0.16">
+              <path
+                d="M0 -42 C18 -18, 18 14, 0 36 C-18 14, -18 -18, 0 -42 Z"
+                fill="#7A1F3D"
+              />
+              <path
+                d="M0 -30 C32 -18, 42 12, 10 34 C4 12, -2 -10, 0 -30 Z"
+                fill="#E8A317"
+              />
+              <path
+                d="M0 -30 C-32 -18, -42 12, -10 34 C-4 12, 2 -10, 0 -30 Z"
+                fill="#E8A317"
+              />
+            </g>
+          </svg>
+
+          <div class="container hero-grid">
+            <div>
+              <div class="hero-kicker">
+                <span class="hero-kicker-line" aria-hidden="true"></span>
+                <span>Meet Shubh, your AI celebration planner</span>
+              </div>
+              <h1 class="hero-title">
+                Plan Your Perfect Event <em>with AI</em>
+              </h1>
+              <p class="hero-subtext">
+                Enter your budget, guests and date. Shubh, your AI planner,
+                handles the rest.
+              </p>
+
+              <div class="hero-ctas">
+                <button type="button" class="btn btn-primary js-start-planning">
+                  Start Planning
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+                <a href="#how-it-works" class="btn btn-secondary">
+                  See How It Works
+                </a>
+              </div>
+
+              <div class="hero-meta-strip">
+                <span>Weddings &amp; multi-day rituals</span>
+                <span class="hero-meta-sep" aria-hidden="true">&middot;</span>
+                <span>Live budget &amp; RSVP sync</span>
+                <span class="hero-meta-sep" aria-hidden="true">&middot;</span>
+                <span>Instant schedule replanning</span>
+              </div>
+            </div>
+
+            <aside class="hero-card" aria-label="Sample Utsav AI Celebration Plan">
+              <div class="hero-card-header">
+                <div>
+                  <div class="hero-card-event">Aarav &amp; Meera&rsquo;s Wedding</div>
+                  <div class="hero-card-meta">
+                    Jaipur &middot; 240 Guests &middot; 3-Day Celebration
+                  </div>
+                </div>
+                <span class="hero-card-countdown tabular-nums">D-48 to go</span>
+              </div>
+
+              <div class="hero-plan-rows">
+                <div class="hero-plan-row">
+                  <div>
+                    <div class="hero-plan-label">Smart Timeline</div>
+                    <div class="hero-plan-sub">
+                      Mehndi, Sangeet &amp; Pheras sequenced
+                    </div>
+                  </div>
+                  <span class="hero-plan-stat tabular-nums">18 / 22 done</span>
+                </div>
+                <div class="hero-plan-row">
+                  <div>
+                    <div class="hero-plan-label">Budget Guardian</div>
+                    <div class="hero-plan-sub">
+                      Decor, catering &amp; venue allocated
+                    </div>
+                  </div>
+                  <span class="hero-plan-stat tabular-nums">94% on track</span>
+                </div>
+                <div class="hero-plan-row">
+                  <div>
+                    <div class="hero-plan-label">RSVP Tracker</div>
+                    <div class="hero-plan-sub">
+                      Outstation travel &amp; room blocks synced
+                    </div>
+                  </div>
+                  <span class="hero-plan-stat tabular-nums">196 confirmed</span>
+                </div>
+              </div>
+
+              <div class="hero-shubh-note">
+                <div class="hero-shubh-author">Shubh AI &middot; Proactive Update</div>
+                <p class="hero-shubh-quote">
+                  &ldquo;22 extra guests confirmed for the Sangeet. I adjusted
+                  your catering count and shifted floral setup 45 minutes
+                  earlier to keep the courtyard clear.&rdquo;
+                </p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- 6 Feature Cards -->
+        <section id="features" class="section section-tinted">
+          <div class="container">
+            <div class="section-header reveal">
+              <span class="section-kicker">Core Capabilities</span>
+              <h2 class="section-title">
+                Every moving piece of a celebration, coordinated in one calm workspace
+              </h2>
+              <p class="section-desc">
+                From the first save-the-date to final vendor settlements, Utsav AI
+                keeps your schedule, guest list, and budget aligned.
+              </p>
+            </div>
+
+            <div class="features-grid">
+              <article class="feature-card reveal">
+                <div class="feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Smart Timeline</h3>
+                <p class="feature-copy">
+                  Generates a month-by-month roadmap tailored to your event
+                  date, ceremonies, and local booking lead times.
+                </p>
+              </article>
+
+              <article class="feature-card reveal">
+                <div class="feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L15 8.5L22 9.3L17 14L18.3 21L12 17.6L5.7 21L7 14L2 9.3L9 8.5L12 2Z"></path>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Vendor Matchmaker</h3>
+                <p class="feature-copy">
+                  Curates decorators, photographers, and caterers filtered by
+                  your city, style preferences, and exact budget bracket.
+                </p>
+              </article>
+
+              <article class="feature-card reveal">
+                <div class="feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <h3 class="feature-title">RSVP Tracker</h3>
+                <p class="feature-copy">
+                  Tracks household invites, meal preferences, and travel arrival
+                  windows across every ceremony without messy spreadsheets.
+                </p>
+              </article>
+
+              <article class="feature-card reveal">
+                <div class="feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+                    <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+                    <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Budget Guardian</h3>
+                <p class="feature-copy">
+                  Splits your total budget across categories, logs deposits, and
+                  alerts you before any vendor quote triggers an overrun.
+                </p>
+              </article>
+
+              <article class="feature-card reveal">
+                <div class="feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Auto Reminders</h3>
+                <p class="feature-copy">
+                  Sends timely nudges for vendor balances, fitting milestones,
+                  and pending guest RSVPs so nothing slips through the cracks.
+                </p>
+              </article>
+
+              <article class="feature-card reveal">
+                <div class="feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Instant Replanning</h3>
+                <p class="feature-copy">
+                  Guest count jumped or rain forced an indoor shift? Tell Shubh
+                  what changed and get an updated timeline and budget in seconds.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4-Step How-It-Works Strip -->
+        <section id="how-it-works" class="section">
+          <div class="container">
+            <div class="section-header centered reveal">
+              <span class="section-kicker">How It Works</span>
+              <h2 class="section-title">From first idea to celebration day</h2>
+              <p class="section-desc">
+                Four straightforward steps to move from scattered notes to a
+                living plan that adapts alongside you.
+              </p>
+            </div>
+
+            <div class="steps-strip">
+              <div class="step-card reveal">
+                <div class="step-num tabular-nums">01</div>
+                <h3 class="step-title">Tell us your event</h3>
+                <p class="step-desc">
+                  Share your celebration type, city, target date, estimated
+                  guest count, and comfortable budget range.
+                </p>
+              </div>
+
+              <div class="step-card reveal">
+                <div class="step-num tabular-nums">02</div>
+                <h3 class="step-title">Get your plan</h3>
+                <p class="step-desc">
+                  Shubh builds a custom checklist, recommended budget split, and
+                  curated vendor shortlists right away.
+                </p>
+              </div>
+
+              <div class="step-card reveal">
+                <div class="step-num tabular-nums">03</div>
+                <h3 class="step-title">Track everything</h3>
+                <p class="step-desc">
+                  Log vendor bookings, monitor RSVPs, and keep upcoming deposits
+                  and overdue tasks organized in one place.
+                </p>
+              </div>
+
+              <div class="step-card reveal">
+                <div class="step-num tabular-nums">04</div>
+                <h3 class="step-title">Shubh replans when life happens</h3>
+                <p class="step-desc">
+                  Venue date shifted or cousin bringing five extra guests? Shubh
+                  recalculates timelines, seating, and costs immediately.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Event-Type Chips -->
+        <section id="event-types" class="section section-blush">
+          <div class="container">
+            <div class="section-header centered reveal">
+              <span class="section-kicker">Tailored Blueprints</span>
+              <h2 class="section-title">Built for every milestone you celebrate</h2>
+              <p class="section-desc">
+                Select an event type to preview how Shubh structures timelines,
+                guests, and vendor categories.
+              </p>
+            </div>
+
+            <div class="chips-wrap reveal" role="tablist" aria-label="Event types">
+              <button type="button" class="event-chip is-active" data-event="Wedding" role="tab" aria-selected="true">
+                Wedding
+              </button>
+              <button type="button" class="event-chip" data-event="Engagement" role="tab" aria-selected="false">
+                Engagement
+              </button>
+              <button type="button" class="event-chip" data-event="Birthday" role="tab" aria-selected="false">
+                Birthday
+              </button>
+              <button type="button" class="event-chip" data-event="Anniversary" role="tab" aria-selected="false">
+                Anniversary
+              </button>
+              <button type="button" class="event-chip" data-event="Corporate Offsite" role="tab" aria-selected="false">
+                Corporate Offsite
+              </button>
+              <button type="button" class="event-chip" data-event="Baby Shower" role="tab" aria-selected="false">
+                Baby Shower
+              </button>
+            </div>
+
+            <div class="event-preview-panel reveal">
+              <div>
+                <h3 id="event-preview-title" class="event-preview-title">
+                  Wedding Blueprint
+                </h3>
+                <p id="event-preview-copy" class="event-preview-copy">
+                  Multi-day ceremony sequencing (Haldi, Mehndi, Sangeet, Pheras),
+                  family-grouped RSVPs, hotel room blocks, and 8-category vendor
+                  budget allocation.
+                </p>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm js-start-planning">
+                Start Planning
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3-Tier Pricing -->
+        <section id="pricing" class="section section-tinted">
+          <div class="container">
+            <div class="section-header centered reveal">
+              <span class="section-kicker">Simple Pricing</span>
+              <h2 class="section-title">Choose the plan that fits your celebration</h2>
+              <p class="section-desc">
+                Start for free with an instant roadmap, or unlock Shubh&rsquo;s
+                continuous AI replanning and multi-event tools.
+              </p>
+            </div>
+
+            <div class="pricing-grid">
+              <article class="pricing-card reveal">
+                <div>
+                  <div class="pricing-tier-row">
+                    <h3 class="pricing-tier-name">Free</h3>
+                  </div>
+                  <p class="pricing-audience">
+                    For intimate dinners, birthdays &amp; early exploration
+                  </p>
+                  <div class="pricing-amount tabular-nums">&#8377;0</div>
+                  <div class="pricing-cadence">Free forever &middot; 1 active event</div>
+
+                  <ul class="pricing-list">
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Smart timeline &amp; milestone checklist</span>
+                    </li>
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Up to 75 guests in RSVP Tracker</span>
+                    </li>
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Starter budget split calculator</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <button type="button" class="btn btn-secondary js-start-planning" style="width: 100%">
+                  Start Planning
+                </button>
+              </article>
+
+              <article class="pricing-card is-featured reveal">
+                <div>
+                  <div class="pricing-tier-row">
+                    <h3 class="pricing-tier-name">Pro</h3>
+                    <span class="pricing-recommended">Most Popular</span>
+                  </div>
+                  <p class="pricing-audience">
+                    For couples &amp; families planning weddings or milestone events
+                  </p>
+                  <div class="pricing-amount tabular-nums">&#8377;2,499</div>
+                  <div class="pricing-cadence">One-time per event &middot; Unlimited collaborators</div>
+
+                  <ul class="pricing-list">
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Unlimited guests, sub-events &amp; WhatsApp/email invites</span>
+                    </li>
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Unlimited Shubh AI chat &amp; instant replanning</span>
+                    </li>
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Vendor Matchmaker shortlists &amp; payment due alerts</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <button type="button" class="btn btn-primary js-start-planning" style="width: 100%">
+                  Start Planning
+                </button>
+              </article>
+
+              <article class="pricing-card reveal">
+                <div>
+                  <div class="pricing-tier-row">
+                    <h3 class="pricing-tier-name">Planner Studio</h3>
+                  </div>
+                  <p class="pricing-audience">
+                    For boutique event planners &amp; corporate hospitality teams
+                  </p>
+                  <div class="pricing-amount tabular-nums">&#8377;6,499</div>
+                  <div class="pricing-cadence">Per month &middot; Up to 15 concurrent events</div>
+
+                  <ul class="pricing-list">
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Client-ready portals &amp; branded timelines</span>
+                    </li>
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Shared vendor directory &amp; contract tracker</span>
+                    </li>
+                    <li>
+                      <svg class="pricing-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Cross-event team reminders &amp; priority support</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <button type="button" class="btn btn-secondary js-start-planning" style="width: 100%">
+                  Start Planning
+                </button>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 Testimonial Cards -->
+        <section id="testimonials" class="section">
+          <div class="container">
+            <div class="section-header centered reveal">
+              <span class="section-kicker">Celebration Stories</span>
+              <h2 class="section-title">Loved by families and event teams</h2>
+              <p class="section-desc">
+                Real hosts and organizers who replaced scattered spreadsheets with
+                one calm workspace.
+              </p>
+            </div>
+
+            <div class="testimonials-grid">
+              <article class="testimonial-card reveal">
+                <p class="testimonial-quote">
+                  &ldquo;When rain threatened our courtyard Sangeet two days out,
+                  Shubh reworked the setup sequence, vendor load-in times, and
+                  indoor seating plan in under a minute. Nothing felt chaotic.&rdquo;
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-name">Ananya &amp; Rohan Verma</div>
+                  <div class="testimonial-role">
+                    3-Day Destination Wedding &middot; Udaipur (280 guests)
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card reveal">
+                <p class="testimonial-quote">
+                  &ldquo;Budget Guardian kept both sides of the family on the
+                  exact same page. Every deposit due date and per-plate estimate
+                  updated automatically as RSVPs came in.&rdquo;
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-name">Priya Nair</div>
+                  <div class="testimonial-role">
+                    50th Anniversary Celebration &middot; Bengaluru (110 guests)
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card reveal">
+                <p class="testimonial-quote">
+                  &ldquo;Planning our annual leadership offsite usually eats up
+                  three weeks of admin work. Utsav AI matched three vetted venues
+                  and generated our entire run-of-show on day one.&rdquo;
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-name">Vikram Deshmukh</div>
+                  <div class="testimonial-role">
+                    Head of People Operations, Kaveri Labs &middot; Goa (95 guests)
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="section" style="padding-top: 0">
+          <div class="container">
+            <div class="cta-banner reveal">
+              <div>
+                <h2 class="cta-banner-title">
+                  Ready to turn your celebration checklist into a calm plan?
+                </h2>
+                <p class="cta-banner-sub">
+                  Launch your workspace now and see how Shubh organizes your
+                  timeline, vendors, guests, and budget together.
+                </p>
+              </div>
+              <button type="button" class="btn btn-marigold js-start-planning">
+                Start Planning
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div>
+              <a href="#top" class="brand-wordmark">
+                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                  <circle cx="14" cy="14" r="13" fill="#E8A317" fill-opacity="0.18" />
+                  <path
+                    d="M14 4.5C15.9 8.2 18.6 10.6 22.5 12C18.6 13.4 15.9 15.8 14 19.5C12.1 15.8 9.4 13.4 5.5 12C9.4 10.6 12.1 8.2 14 4.5Z"
+                    fill="#7A1F3D"
+                  />
+                  <circle cx="14" cy="12" r="2.2" fill="#E8A317" />
+                </svg>
+                <span>Utsav AI</span>
+              </a>
+              <p class="footer-brand-copy">
+                Your AI-powered event and wedding planning companion. Thoughtful
+                timelines, steady budgets, and effortless replanning with Shubh.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="footer-col-title">Product</h3>
+              <ul class="footer-links">
+                <li><a href="#features">Smart Timeline</a></li>
+                <li><a href="#features">Vendor Matchmaker</a></li>
+                <li><a href="#features">Budget Guardian</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="footer-col-title">Celebrations</h3>
+              <ul class="footer-links">
+                <li><a href="#event-types">Weddings</a></li>
+                <li><a href="#event-types">Engagements</a></li>
+                <li><a href="#event-types">Birthdays &amp; Anniversaries</a></li>
+                <li><a href="#event-types">Corporate Offsites</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="footer-col-title">Workspace</h3>
+              <ul class="footer-links">
+                <li>
+                  <button type="button" class="js-start-planning">
+                    Open Planner App
+                  </button>
+                </li>
+                <li><a href="#how-it-works">How Shubh Works</a></li>
+                <li><a href="#testimonials">Host Stories</a></li>
+                <li><a href="mailto:hello@utsav.ai">hello@utsav.ai</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <span>&copy; 2026 Utsav AI. Crafted for joyful celebrations.</span>
+            <span>Marigold &amp; Ivory Edition</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ===================================================================
+         VIEW — LOGIN SCREEN (SHOWN WHEN NO userProfile IN localStorage)
+         =================================================================== -->
+    <div id="view-login" class="login-screen hero-backdrop is-hidden" aria-hidden="true">
+      <svg class="hero-motif" viewBox="0 0 1440 820" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M-40 120 C 200 220, 440 70, 660 150" stroke="#E8A317" stroke-opacity="0.24" stroke-width="1.5" stroke-dasharray="6 8" />
+        <g transform="translate(150, 140)" opacity="0.26">
+          <circle cx="0" cy="0" r="14" fill="#E8A317" />
+          <circle cx="0" cy="0" r="6" fill="#7A1F3D" />
+        </g>
+        <path d="M1190 125 C1205 110, 1228 125, 1212 145 C1196 155, 1180 140, 1190 125 Z" fill="#E8A317" fill-opacity="0.24" />
+        <path d="M1280 650 C1296 636, 1316 654, 1300 672 C1284 682, 1270 666, 1280 650 Z" fill="#7A1F3D" fill-opacity="0.14" />
+      </svg>
+
+      <div class="login-card">
+        <div class="login-logo">
+          <svg width="30" height="30" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="13" fill="#E8A317" fill-opacity="0.18" />
+            <path d="M14 4.5C15.9 8.2 18.6 10.6 22.5 12C18.6 13.4 15.9 15.8 14 19.5C12.1 15.8 9.4 13.4 5.5 12C9.4 10.6 12.1 8.2 14 4.5Z" fill="#7A1F3D" />
+            <circle cx="14" cy="12" r="2.2" fill="#E8A317" />
+          </svg>
+          <span>Utsav AI</span>
+        </div>
+        <p class="login-tagline">Your AI Event Planner</p>
+
+        <button type="button" id="google-signin-btn" class="btn btn-google">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.68-.22-2.48H12v4.69h6.46a5.52 5.52 0 0 1-2.39 3.62v3.01h3.87c2.26-2.08 3.58-5.15 3.58-8.84z" />
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.07 7.94-2.91l-3.87-3.01c-1.07.72-2.44 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.27v3.11A12 12 0 0 0 12 24z" />
+            <path fill="#FBBC05" d="M5.27 14.27A7.2 7.2 0 0 1 4.89 12c0-.79.14-1.56.38-2.27V6.62H1.27A12 12 0 0 0 0 12c0 1.94.46 3.77 1.27 5.38l4-3.11z" />
+            <path fill="#EA4335" d="M12 4.77c1.76 0 3.34.61 4.58 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0A12 12 0 0 0 1.27 6.62l4 3.11C6.22 6.88 8.87 4.77 12 4.77z" />
+          </svg>
+          <span>Sign in with Google</span>
+        </button>
+
+        <div id="google-signin-panel" class="google-signin-panel is-hidden">
+          <div class="google-signin-header">Continue with your Google account</div>
+          <p class="google-signin-sub">
+            Enter your name and Google email to personalize and save your plan locally.
+          </p>
+          <form id="google-signin-form">
+            <div class="field-group" style="margin-bottom: 12px">
+              <label class="field-label" for="google-name-input">Full Name</label>
+              <input
+                type="text"
+                id="google-name-input"
+                class="input"
+                placeholder="e.g. Mitali Seth"
+                required
+              />
+            </div>
+            <div class="field-group" style="margin-bottom: 14px">
+              <label class="field-label" for="google-email-input">Google Email</label>
+              <input
+                type="email"
+                id="google-email-input"
+                class="input"
+                placeholder="e.g. mitali@gmail.com"
+                required
+              />
+            </div>
+            <div id="google-form-error" class="field-error is-hidden" style="margin-bottom: 12px"></div>
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              Continue to Event Setup
+            </button>
+          </form>
+        </div>
+
+        <div class="login-divider">or</div>
+
+        <button type="button" id="guest-signin-btn" class="btn btn-secondary" style="width: 100%">
+          Continue as Guest
+        </button>
+
+        <div>
+          <button type="button" class="login-back-link js-back-landing">
+            &larr; Back to Utsav AI Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         VIEW — EVENT SETUP WIZARD (4 STEPS + BUDGET SUMMARY)
+         =================================================================== -->
+    <div id="view-wizard" class="wizard-screen hero-backdrop is-hidden" aria-hidden="true">
+      <svg class="hero-motif" viewBox="0 0 1440 820" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M-40 120 C 200 220, 440 70, 660 150" stroke="#E8A317" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="6 8" />
+        <path d="M1190 125 C1205 110, 1228 125, 1212 145 C1196 155, 1180 140, 1190 125 Z" fill="#E8A317" fill-opacity="0.2" />
+      </svg>
+
+      <div class="wizard-shell">
+        <div class="wizard-top">
+          <div class="brand-wordmark">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <circle cx="14" cy="14" r="13" fill="#E8A317" fill-opacity="0.18" />
+              <path d="M14 4.5C15.9 8.2 18.6 10.6 22.5 12C18.6 13.4 15.9 15.8 14 19.5C12.1 15.8 9.4 13.4 5.5 12C9.4 10.6 12.1 8.2 14 4.5Z" fill="#7A1F3D" />
+              <circle cx="14" cy="12" r="2.2" fill="#E8A317" />
+            </svg>
+            <span>Utsav AI</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px">
+            <span id="wizard-user-label" class="wizard-user-label"></span>
+            <button type="button" id="wizard-cancel-btn" class="btn btn-secondary btn-sm is-hidden">
+              Back to Workspace
+            </button>
+          </div>
+        </div>
+
+        <div class="wizard-card">
+          <!-- Progress Bar -->
+          <div class="wizard-progress">
+            <div class="wizard-progress-meta">
+              <span id="wizard-step-counter" class="tabular-nums">Step 1 of 4</span>
+              <span id="wizard-step-title-badge">The Event</span>
+            </div>
+            <div class="wizard-progress-track">
+              <div id="wizard-progress-fill" class="wizard-progress-fill" style="width: 25%"></div>
+            </div>
+            <div class="wizard-steps-labels">
+              <span class="wizard-step-label is-active" data-step-label="1">1. The Event</span>
+              <span class="wizard-step-label" data-step-label="2">2. When &amp; Where</span>
+              <span class="wizard-step-label" data-step-label="3">3. Budget &amp; Guests</span>
+              <span class="wizard-step-label" data-step-label="4">4. Preferences</span>
+            </div>
+          </div>
+
+          <!-- STEP 1: THE EVENT -->
+          <div id="wizard-step-1" class="wizard-step-pane">
+            <h1 class="wizard-heading">Tell Shubh about your celebration</h1>
+            <p class="wizard-sub">
+              Pick the occasion, give it a name, and let us know how many functions you are hosting.
+            </p>
+
+            <div class="field-group">
+              <label class="field-label">Event Type</label>
+              <div id="wiz-event-types" class="option-cards-grid">
+                <button type="button" class="option-card is-selected" data-wiz-type="Wedding">Wedding</button>
+                <button type="button" class="option-card" data-wiz-type="Engagement">Engagement</button>
+                <button type="button" class="option-card" data-wiz-type="Birthday">Birthday</button>
+                <button type="button" class="option-card" data-wiz-type="Anniversary">Anniversary</button>
+                <button type="button" class="option-card" data-wiz-type="Corporate Offsite">Corporate Offsite</button>
+                <button type="button" class="option-card" data-wiz-type="Baby Shower">Baby Shower</button>
+                <button type="button" class="option-card" data-wiz-type="Other">Other</button>
+              </div>
+            </div>
+
+            <div class="two-col-fields">
+              <div class="field-group">
+                <label class="field-label" for="wiz-event-name">Event Name</label>
+                <input
+                  type="text"
+                  id="wiz-event-name"
+                  class="input"
+                  placeholder="e.g. Aarav & Meera's Wedding"
+                />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="wiz-hosts">Host Names</label>
+                <input
+                  type="text"
+                  id="wiz-hosts"
+                  class="input"
+                  placeholder="e.g. Sharma & Kapoor Families"
+                />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="wiz-days-count">Number of Days / Functions</label>
+              <input
+                type="number"
+                id="wiz-days-count"
+                class="input"
+                min="1"
+                max="14"
+                value="3"
+                style="max-width: 180px"
+              />
+            </div>
+
+            <div id="wiz-wedding-functions-group" class="field-group">
+              <label class="field-label">Wedding Functions (select all that apply)</label>
+              <div id="wiz-functions-chips" class="select-chips">
+                <button type="button" class="select-chip is-selected" data-func="Haldi">Haldi</button>
+                <button type="button" class="select-chip is-selected" data-func="Mehendi">Mehendi</button>
+                <button type="button" class="select-chip is-selected" data-func="Sangeet">Sangeet</button>
+                <button type="button" class="select-chip is-selected" data-func="Wedding">Wedding</button>
+                <button type="button" class="select-chip is-selected" data-func="Reception">Reception</button>
+              </div>
+            </div>
+
+            <div id="wiz-error-1" class="field-error is-hidden"></div>
+          </div>
+
+          <!-- STEP 2: WHEN & WHERE -->
+          <div id="wizard-step-2" class="wizard-step-pane is-hidden">
+            <h1 class="wizard-heading">When &amp; where is it happening?</h1>
+            <p class="wizard-sub">
+              Shubh uses your date and city to calibrate booking lead times and venue suggestions.
+            </p>
+
+            <div class="two-col-fields">
+              <div class="field-group">
+                <label class="field-label" for="wiz-date">Event Date (must be in the future)</label>
+                <input type="date" id="wiz-date" class="input" />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="wiz-city">City</label>
+                <select id="wiz-city" class="select">
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Delhi NCR">Delhi NCR</option>
+                  <option value="Bengaluru">Bengaluru</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Pune">Pune</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Jaipur" selected>Jaipur</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Udaipur">Udaipur</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="live-stat-banner">
+              <span class="live-stat-label">Live Celebration Countdown</span>
+              <span id="wiz-live-countdown" class="live-stat-value tabular-nums">Select a future date</span>
+            </div>
+
+            <div class="field-group" style="margin-top: 22px">
+              <label class="field-label">Venue Type Preference</label>
+              <div id="wiz-venue-types" class="option-cards-grid">
+                <button type="button" class="option-card" data-venue="Banquet Hall">Banquet Hall</button>
+                <button type="button" class="option-card is-selected" data-venue="Hotel">Hotel</button>
+                <button type="button" class="option-card" data-venue="Outdoor/Lawn">Outdoor/Lawn</button>
+                <button type="button" class="option-card" data-venue="Beach">Beach</button>
+                <button type="button" class="option-card" data-venue="Heritage Property">Heritage Property</button>
+                <button type="button" class="option-card" data-venue="Home">Home</button>
+              </div>
+            </div>
+
+            <div id="wiz-error-2" class="field-error is-hidden"></div>
+          </div>
+
+          <!-- STEP 3: BUDGET & GUESTS -->
+          <div id="wizard-step-3" class="wizard-step-pane is-hidden">
+            <h1 class="wizard-heading">Set your budget &amp; guest count</h1>
+            <p class="wizard-sub">
+              Slide or type your total celebration budget in INR and expected headcount.
+            </p>
+
+            <div class="field-group">
+              <label class="field-label" for="wiz-budget-num">Total Budget (INR)</label>
+              <div class="range-row">
+                <input
+                  type="range"
+                  id="wiz-budget-slider"
+                  min="50000"
+                  max="10000000"
+                  step="25000"
+                  value="1500000"
+                />
+                <input
+                  type="number"
+                  id="wiz-budget-num"
+                  class="input tabular-nums"
+                  min="50000"
+                  max="10000000"
+                  step="5000"
+                  value="1500000"
+                />
+              </div>
+              <div id="wiz-budget-formatted" class="field-hint tabular-nums">
+                Selected budget: &#8377;15,00,000
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="wiz-guests-num">Expected Guest Count (10 to 2,000)</label>
+              <div class="range-row">
+                <input
+                  type="range"
+                  id="wiz-guests-slider"
+                  min="10"
+                  max="2000"
+                  step="5"
+                  value="200"
+                />
+                <input
+                  type="number"
+                  id="wiz-guests-num"
+                  class="input tabular-nums"
+                  min="10"
+                  max="2000"
+                  value="200"
+                />
+              </div>
+            </div>
+
+            <div class="live-stat-banner">
+              <span class="live-stat-label">Estimated Allocation Per Guest</span>
+              <span id="wiz-per-guest" class="live-stat-value tabular-nums">Budget per guest: &#8377;7,500</span>
+            </div>
+
+            <div id="wiz-error-3" class="field-error is-hidden"></div>
+          </div>
+
+          <!-- STEP 4: PREFERENCES -->
+          <div id="wizard-step-4" class="wizard-step-pane is-hidden">
+            <h1 class="wizard-heading">Style, food &amp; top 3 priorities</h1>
+            <p class="wizard-sub">
+              Shubh boosts your budget allocation by +3% for each of your top 3 priorities.
+            </p>
+
+            <div class="field-group">
+              <label class="field-label">Celebration Style (select all that resonate)</label>
+              <div id="wiz-style-chips" class="select-chips">
+                <button type="button" class="select-chip is-selected" data-style="Traditional">Traditional</button>
+                <button type="button" class="select-chip" data-style="Modern">Modern</button>
+                <button type="button" class="select-chip" data-style="Minimal">Minimal</button>
+                <button type="button" class="select-chip is-selected" data-style="Royal">Royal</button>
+                <button type="button" class="select-chip" data-style="Boho">Boho</button>
+                <button type="button" class="select-chip" data-style="Destination">Destination</button>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Food Preference</label>
+              <div id="wiz-food-chips" class="select-chips">
+                <button type="button" class="select-chip is-selected" data-food="Veg">Veg</button>
+                <button type="button" class="select-chip" data-food="Non-veg">Non-veg</button>
+                <button type="button" class="select-chip" data-food="Both">Both</button>
+                <button type="button" class="select-chip" data-food="Jain">Jain</button>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">
+                Pick Your Top 3 Priorities
+                <span id="wiz-priority-count" style="font-weight: 500; color: var(--maroon)">
+                  (0 / 3 selected)
+                </span>
+              </label>
+              <div id="wiz-priority-chips" class="select-chips">
+                <button type="button" class="select-chip" data-priority="Venue">Venue</button>
+                <button type="button" class="select-chip" data-priority="Food">Food</button>
+                <button type="button" class="select-chip" data-priority="Decor">Decor</button>
+                <button type="button" class="select-chip" data-priority="Photography">Photography</button>
+                <button type="button" class="select-chip" data-priority="Entertainment">Entertainment</button>
+                <button type="button" class="select-chip" data-priority="Attire">Attire</button>
+                <button type="button" class="select-chip" data-priority="Guest Experience">Guest Experience</button>
+              </div>
+              <p class="field-hint">
+                Click in order of importance. Each selected priority receives +3% shifted evenly from remaining categories.
+              </p>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="wiz-notes">Anything else Shubh should know?</label>
+              <textarea
+                id="wiz-notes"
+                class="textarea"
+                placeholder="e.g. Elderly guests need ground-floor access, live Sufi band for Sangeet..."
+              ></textarea>
+            </div>
+
+            <div id="wiz-error-4" class="field-error is-hidden"></div>
+          </div>
+
+          <!-- SUMMARY & BUDGET SPLIT DONUT CHART (AFTER STEP 4) -->
+          <div id="wizard-step-summary" class="wizard-step-pane is-hidden">
+            <h1 class="wizard-heading">Your celebration blueprint is ready</h1>
+            <p class="wizard-sub">
+              Review your inputs and the priority-adjusted budget split prepared by Shubh.
+            </p>
+
+            <div class="summary-grid">
+              <div class="summary-details" id="summary-inputs-box"></div>
+
+              <div class="donut-card">
+                <h3 style="font-size: 18px; margin-bottom: 14px">Recommended Budget Split</h3>
+                <div class="donut-wrap">
+                  <svg id="budget-donut-svg" width="210" height="210" viewBox="0 0 210 210" aria-label="Budget Split Donut Chart"></svg>
+                  <div id="budget-donut-legend" class="donut-legend"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wizard Footer Actions -->
+          <div class="wizard-actions">
+            <button type="button" id="wiz-prev-btn" class="btn btn-secondary">
+              &larr; Back
+            </button>
+            <div style="display: flex; gap: 12px; align-items: center">
+              <button type="button" id="wiz-next-btn" class="btn btn-primary">
+                Next &rarr;
+              </button>
+              <button type="button" id="wiz-finish-btn" class="btn btn-marigold is-hidden">
+                Generate My Plan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         VIEW 2 — APP SHELL
+         =================================================================== -->
+    <div id="view-app" class="app-shell is-hidden" aria-hidden="true">
+      <aside class="app-sidebar" aria-label="Workspace Navigation">
+        <div>
+          <div class="sidebar-brand">
+            <button type="button" id="sidebar-logo-btn" class="brand-wordmark" title="Back to Landing Page">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <circle cx="14" cy="14" r="13" fill="#E8A317" fill-opacity="0.18" />
+                <path d="M14 4.5C15.9 8.2 18.6 10.6 22.5 12C18.6 13.4 15.9 15.8 14 19.5C12.1 15.8 9.4 13.4 5.5 12C9.4 10.6 12.1 8.2 14 4.5Z" fill="#7A1F3D" />
+                <circle cx="14" cy="12" r="2.2" fill="#E8A317" />
+              </svg>
+              <span>Utsav AI</span>
+            </button>
+          </div>
+
+          <nav class="sidebar-nav" role="tablist" aria-label="Planner Sections">
+            <button type="button" class="sidebar-tab is-active" data-tab="dashboard" role="tab" aria-selected="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+                <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+                <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+              </svg>
+              <span>Dashboard</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="timeline" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>Timeline</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="vendors" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Vendors</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="guests" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Guests</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="budget" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+                <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
+              </svg>
+              <span>Budget</span>
+            </button>
+
+            <button type="button" class="sidebar-tab" data-tab="shubh" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Shubh AI</span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-user-box">
+            <div id="sidebar-user-name" class="sidebar-user-name">Guest Host</div>
+            <div id="sidebar-user-email" class="sidebar-user-email">guest@utsav.ai</div>
+          </div>
+
+          <button type="button" class="back-home-btn js-back-landing">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Landing</span>
+          </button>
+
+          <button type="button" id="signout-btn" class="back-home-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </aside>
+
+      <div class="app-main">
+        <header class="app-topbar">
+          <div class="app-topbar-left">
+            <button type="button" class="mobile-back-btn js-back-landing">
+              &larr; Home
+            </button>
+            <h2 id="app-event-title" class="app-event-name">
+              Aarav &amp; Meera&rsquo;s Wedding
+            </h2>
+          </div>
+
+          <div class="app-topbar-right">
+            <span id="app-countdown-pill" class="countdown-pill tabular-nums">D-48 to go</span>
+            <button
+              type="button"
+              id="bell-btn"
+              class="bell-btn"
+              aria-label="Toggle reminders"
+              aria-expanded="false"
+              aria-controls="bell-popover"
+            >
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+            </button>
+
+            <div id="bell-popover" class="bell-popover is-hidden" role="region" aria-label="Upcoming reminders">
+              <div class="bell-popover-title">Auto Reminders</div>
+              <div class="bell-item">
+                <div>Confirm floral mandap moodboard</div>
+                <div class="bell-item-time">Due in 2 days &middot; Vendors</div>
+              </div>
+              <div class="bell-item">
+                <div>Follow up on pending family RSVPs</div>
+                <div class="bell-item-time">Due in 4 days &middot; Guests</div>
+              </div>
+              <div class="bell-item">
+                <div>Catering installment check</div>
+                <div class="bell-item-time">Due next week &middot; Budget</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="app-content">
+          <!-- TAB 1: DASHBOARD -->
+          <section id="panel-dashboard" class="tab-panel is-active" role="tabpanel">
+            <div class="tab-header-row">
+              <div>
+                <h1 class="tab-title">Dashboard</h1>
+                <p id="dash-subtitle" class="tab-subtitle">
+                  Overview of your celebration readiness, schedule, budget, and RSVPs.
+                </p>
+              </div>
+              <button type="button" id="edit-event-btn" class="btn btn-secondary btn-sm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                <span>Edit Event</span>
+              </button>
+            </div>
+
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-4">
+                <div>
+                  <h3 class="placeholder-box-title">Countdown</h3>
+                  <div id="dash-countdown-val" class="placeholder-live-val tabular-nums">D-48 to go</div>
+                  <p id="dash-countdown-desc" class="placeholder-box-desc">
+                    Live days and key pre-event milestones leading up to celebration day.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+
+              <div class="placeholder-box span-4">
+                <div>
+                  <h3 class="placeholder-box-title">Plan Health</h3>
+                  <div id="dash-health-val" class="placeholder-live-val">Ready to plan</div>
+                  <p id="dash-health-desc" class="placeholder-box-desc">
+                    Overall readiness summary across vendor confirmations, tasks, and schedule buffers.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+
+              <div class="placeholder-box span-4">
+                <div>
+                  <h3 class="placeholder-box-title">Upcoming Tasks</h3>
+                  <p id="dash-tasks-desc" class="placeholder-box-desc">
+                    Prioritized to-dos for this week assigned across hosts and family coordinators.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+
+              <div class="placeholder-box span-6">
+                <div>
+                  <h3 class="placeholder-box-title">Budget Snapshot</h3>
+                  <div id="dash-budget-val" class="placeholder-live-val tabular-nums">&#8377;15,00,000</div>
+                  <div id="dash-budget-splits" class="mini-split-list"></div>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+
+              <div class="placeholder-box span-6">
+                <div>
+                  <h3 class="placeholder-box-title">RSVP Snapshot</h3>
+                  <div id="dash-rsvp-val" class="placeholder-live-val tabular-nums">200 Expected Guests</div>
+                  <p id="dash-rsvp-desc" class="placeholder-box-desc">
+                    Confirmed, declined, and pending guest headcounts across each sub-event.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 2: TIMELINE -->
+          <section id="panel-timeline" class="tab-panel" role="tabpanel">
+            <div class="tab-header">
+              <h1 class="tab-title">Timeline</h1>
+              <p class="tab-subtitle">
+                Every milestone from venue booking to ceremony run-of-show.
+              </p>
+            </div>
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-12">
+                <div>
+                  <h3 class="placeholder-box-title">Month-by-Month Timeline</h3>
+                  <p class="placeholder-box-desc">
+                    Chronological roadmap breaking down bookings, invitations, fittings, and ceremony prep by month.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-7">
+                <div>
+                  <h3 class="placeholder-box-title">Checklist</h3>
+                  <p class="placeholder-box-desc">
+                    Actionable task list grouped by ceremony, owner, and target completion date.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-5">
+                <div>
+                  <h3 class="placeholder-box-title">Overdue Tasks</h3>
+                  <p class="placeholder-box-desc">
+                    Flagged items needing immediate attention or automatic rescheduling by Shubh.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 3: VENDORS -->
+          <section id="panel-vendors" class="tab-panel" role="tabpanel">
+            <div class="tab-header">
+              <h1 class="tab-title">Vendors</h1>
+              <p class="tab-subtitle">
+                Discover, compare, and confirm trusted celebration partners.
+              </p>
+            </div>
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-4">
+                <div>
+                  <h3 class="placeholder-box-title">Suggested Vendors</h3>
+                  <p class="placeholder-box-desc">
+                    AI-matched venues, decorators, photographers, and caterers aligned with your style and budget.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-4">
+                <div>
+                  <h3 class="placeholder-box-title">Shortlist</h3>
+                  <p class="placeholder-box-desc">
+                    Side-by-side quote comparisons, availability notes, and tasting or call schedules.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-4">
+                <div>
+                  <h3 class="placeholder-box-title">Booked</h3>
+                  <p class="placeholder-box-desc">
+                    Confirmed partners with signed agreements, point-of-contact details, and arrival slots.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 4: GUESTS -->
+          <section id="panel-guests" class="tab-panel" role="tabpanel">
+            <div class="tab-header">
+              <h1 class="tab-title">Guests</h1>
+              <p class="tab-subtitle">
+                Manage households, track attendance per ceremony, and coordinate invites.
+              </p>
+            </div>
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-12">
+                <div>
+                  <h3 class="placeholder-box-title">Guest List</h3>
+                  <p class="placeholder-box-desc">
+                    Searchable household directory with family side, dietary notes, and hotel allocation.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-6">
+                <div>
+                  <h3 class="placeholder-box-title">RSVP Summary</h3>
+                  <p class="placeholder-box-desc">
+                    Real-time attendance breakdown across your celebration functions.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-6">
+                <div>
+                  <h3 class="placeholder-box-title">Send Invites</h3>
+                  <p class="placeholder-box-desc">
+                    Personalized digital invite links and automated follow-up reminders for pending guests.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 5: BUDGET -->
+          <section id="panel-budget" class="tab-panel" role="tabpanel">
+            <div class="tab-header">
+              <h1 class="tab-title">Budget</h1>
+              <p class="tab-subtitle">
+                Keep spending transparent across every category and installment.
+              </p>
+            </div>
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-12">
+                <div>
+                  <h3 class="placeholder-box-title">Budget Split</h3>
+                  <div id="budget-tab-split-list" class="mini-split-list" style="margin-bottom: 8px"></div>
+                  <p class="placeholder-box-desc">
+                    Category-wise allocation adjusted for your top 3 priorities.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-6">
+                <div>
+                  <h3 class="placeholder-box-title">Expenses</h3>
+                  <p class="placeholder-box-desc">
+                    Itemized ledger of deposits, invoices, and unplanned adjustments against your cap.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-6">
+                <div>
+                  <h3 class="placeholder-box-title">Payments Due</h3>
+                  <p class="placeholder-box-desc">
+                    Upcoming vendor installment calendar with payment status and due-date alerts.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB 6: SHUBH AI -->
+          <section id="panel-shubh" class="tab-panel" role="tabpanel">
+            <div class="tab-header">
+              <h1 class="tab-title">Shubh AI</h1>
+              <p class="tab-subtitle">
+                Your intelligent celebration planner for quick answers and instant replanning.
+              </p>
+            </div>
+            <div class="placeholder-grid">
+              <div class="placeholder-box span-7">
+                <div>
+                  <h3 class="placeholder-box-title">Chat with Shubh</h3>
+                  <p class="placeholder-box-desc">
+                    Conversational planning workspace to ask etiquette questions, draft guest messages, or adjust vendor briefs.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+              <div class="placeholder-box span-5">
+                <div>
+                  <h3 class="placeholder-box-title">What Changed? Replan</h3>
+                  <p class="placeholder-box-desc">
+                    Enter a guest count shift, date change, or budget tweak and preview Shubh&rsquo;s updated timeline and cost cascade.
+                  </p>
+                </div>
+                <span class="placeholder-box-meta">Future module placeholder</span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <nav class="mobile-bottom-nav" role="tablist" aria-label="Mobile Workspace Navigation">
+        <button type="button" class="mobile-tab-btn is-active" data-tab="dashboard" role="tab" aria-selected="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+          </svg>
+          <span>Home</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="timeline" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Timeline</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="vendors" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span>Vendors</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="guests" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+          </svg>
+          <span>Guests</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="budget" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+          </svg>
+          <span>Budget</span>
+        </button>
+
+        <button type="button" class="mobile-tab-btn" data-tab="shubh" role="tab" aria-selected="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Shubh AI</span>
+        </button>
+      </nav>
+    </div>
+
+    <script>
+      (function () {
+        'use strict';
+
+        /* ===================================================================
+           STORAGE KEYS & DOMAIN CONSTANTS
+           =================================================================== */
+        var USER_KEY = 'userProfile';
+        var EVENT_KEY = 'eventProfile';
+        var LAST_VIEW_KEY = 'utsavActiveView';
+
+        var BUDGET_CATEGORIES = [
+          'Venue',
+          'Catering',
+          'Decor',
+          'Photography',
+          'Attire & Jewellery',
+          'Entertainment',
+          'Invitations & Gifts',
+          'Contingency'
+        ];
+
+        var CATEGORY_COLORS = {
+          Venue: '#7A1F3D',
+          Catering: '#E8A317',
+          Decor: '#B84A62',
+          Photography: '#C97A16',
+          'Attire & Jewellery': '#57142A',
+          Entertainment: '#F2B84B',
+          'Invitations & Gifts': '#D98C9E',
+          Contingency: '#8A777D'
+        };
+
+        var DEFAULT_SPLITS = {
+          Wedding: {
+            Venue: 25,
+            Catering: 30,
+            Decor: 12,
+            Photography: 8,
+            'Attire & Jewellery': 10,
+            Entertainment: 5,
+            'Invitations & Gifts': 4,
+            Contingency: 6
+          },
+          Engagement: {
+            Venue: 26,
+            Catering: 32,
+            Decor: 14,
+            Photography: 10,
+            'Attire & Jewellery': 6,
+            Entertainment: 4,
+            'Invitations & Gifts': 3,
+            Contingency: 5
+          },
+          Birthday: {
+            Venue: 22,
+            Catering: 32,
+            Decor: 16,
+            Photography: 8,
+            'Attire & Jewellery': 4,
+            Entertainment: 10,
+            'Invitations & Gifts': 3,
+            Contingency: 5
+          },
+          Anniversary: {
+            Venue: 24,
+            Catering: 32,
+            Decor: 14,
+            Photography: 10,
+            'Attire & Jewellery': 5,
+            Entertainment: 6,
+            'Invitations & Gifts': 4,
+            Contingency: 5
+          },
+          'Corporate Offsite': {
+            Venue: 32,
+            Catering: 28,
+            Decor: 6,
+            Photography: 6,
+            'Attire & Jewellery': 2,
+            Entertainment: 12,
+            'Invitations & Gifts': 6,
+            Contingency: 8
+          },
+          'Baby Shower': {
+            Venue: 20,
+            Catering: 30,
+            Decor: 20,
+            Photography: 10,
+            'Attire & Jewellery': 4,
+            Entertainment: 6,
+            'Invitations & Gifts': 5,
+            Contingency: 5
+          },
+          Other: {
+            Venue: 25,
+            Catering: 30,
+            Decor: 14,
+            Photography: 8,
+            'Attire & Jewellery': 5,
+            Entertainment: 8,
+            'Invitations & Gifts': 4,
+            Contingency: 6
+          }
+        };
+
+        var PRIORITY_TO_CATEGORY = {
+          Venue: 'Venue',
+          Food: 'Catering',
+          Decor: 'Decor',
+          Photography: 'Photography',
+          Entertainment: 'Entertainment',
+          Attire: 'Attire & Jewellery',
+          'Guest Experience': 'Invitations & Gifts'
+        };
+
+        var eventBlueprints = {
+          Wedding: {
+            title: 'Wedding Blueprint',
+            copy: 'Multi-day ceremony sequencing (Haldi, Mehndi, Sangeet, Pheras), family-grouped RSVPs, hotel room blocks, and 8-category vendor budget allocation.'
+          },
+          Engagement: {
+            title: 'Engagement Blueprint',
+            copy: 'Intimate venue shortlists, ring ceremony run-of-show, photographer timing, and streamlined evening dining RSVP tracking.'
+          },
+          Birthday: {
+            title: 'Birthday Blueprint',
+            copy: 'Theme & decor shortlist, cake and catering headcount tracker, music playlist milestones, and digital invite dispatch.'
+          },
+          Anniversary: {
+            title: 'Anniversary Blueprint',
+            copy: 'Family dinner & vow renewal timeline, acoustic entertainment coordination, photo tribute cues, and shared budget split.'
+          },
+          'Corporate Offsite': {
+            title: 'Corporate Offsite Blueprint',
+            copy: 'Retreat venue matching, attendee travel & rooming manifests, session agenda timeline, and finance-ready expense tracking.'
+          },
+          'Baby Shower': {
+            title: 'Baby Shower Blueprint',
+            copy: 'Afternoon venue & floral styling, dietary-aware brunch catering, games schedule, and effortless gift & RSVP tracking.'
+          }
+        };
+
+        /* ===================================================================
+           DOM REFERENCES
+           =================================================================== */
+        var viewLanding = document.getElementById('view-landing');
+        var viewLogin = document.getElementById('view-login');
+        var viewWizard = document.getElementById('view-wizard');
+        var viewApp = document.getElementById('view-app');
+
+        var startButtons = document.querySelectorAll('.js-start-planning');
+        var backButtons = document.querySelectorAll('.js-back-landing');
+        var sidebarLogoBtn = document.getElementById('sidebar-logo-btn');
+
+        var hamburgerBtn = document.getElementById('hamburger-btn');
+        var mobileDrawer = document.getElementById('mobile-drawer');
+        var drawerLinks = document.querySelectorAll('.js-drawer-link');
+        var eventChips = document.querySelectorAll('.event-chip');
+        var eventPreviewTitle = document.getElementById('event-preview-title');
+        var eventPreviewCopy = document.getElementById('event-preview-copy');
+
+        // Login controls
+        var googleSigninBtn = document.getElementById('google-signin-btn');
+        var googleSigninPanel = document.getElementById('google-signin-panel');
+        var googleSigninForm = document.getElementById('google-signin-form');
+        var googleNameInput = document.getElementById('google-name-input');
+        var googleEmailInput = document.getElementById('google-email-input');
+        var googleFormError = document.getElementById('google-form-error');
+        var guestSigninBtn = document.getElementById('guest-signin-btn');
+
+        // Wizard controls
+        var wizardUserLabel = document.getElementById('wizard-user-label');
+        var wizardCancelBtn = document.getElementById('wizard-cancel-btn');
+        var wizardStepCounter = document.getElementById('wizard-step-counter');
+        var wizardStepTitleBadge = document.getElementById('wizard-step-title-badge');
+        var wizardProgressFill = document.getElementById('wizard-progress-fill');
+        var wizardStepLabels = document.querySelectorAll('[data-step-label]');
+        var wizardPanes = {
+          1: document.getElementById('wizard-step-1'),
+          2: document.getElementById('wizard-step-2'),
+          3: document.getElementById('wizard-step-3'),
+          4: document.getElementById('wizard-step-4'),
+          5: document.getElementById('wizard-step-summary')
+        };
+        var wizPrevBtn = document.getElementById('wiz-prev-btn');
+        var wizNextBtn = document.getElementById('wiz-next-btn');
+        var wizFinishBtn = document.getElementById('wiz-finish-btn');
+
+        // Step 1 inputs
+        var wizEventTypeBtns = document.querySelectorAll('[data-wiz-type]');
+        var wizEventNameInput = document.getElementById('wiz-event-name');
+        var wizHostsInput = document.getElementById('wiz-hosts');
+        var wizDaysInput = document.getElementById('wiz-days-count');
+        var wizWeddingGroup = document.getElementById('wiz-wedding-functions-group');
+        var wizFunctionBtns = document.querySelectorAll('[data-func]');
+
+        // Step 2 inputs
+        var wizDateInput = document.getElementById('wiz-date');
+        var wizCitySelect = document.getElementById('wiz-city');
+        var wizVenueBtns = document.querySelectorAll('[data-venue]');
+        var wizLiveCountdown = document.getElementById('wiz-live-countdown');
+
+        // Step 3 inputs
+        var wizBudgetSlider = document.getElementById('wiz-budget-slider');
+        var wizBudgetNum = document.getElementById('wiz-budget-num');
+        var wizBudgetFormatted = document.getElementById('wiz-budget-formatted');
+        var wizGuestsSlider = document.getElementById('wiz-guests-slider');
+        var wizGuestsNum = document.getElementById('wiz-guests-num');
+        var wizPerGuest = document.getElementById('wiz-per-guest');
+
+        // Step 4 inputs
+        var wizStyleBtns = document.querySelectorAll('[data-style]');
+        var wizFoodBtns = document.querySelectorAll('[data-food]');
+        var wizPriorityBtns = document.querySelectorAll('[data-priority]');
+        var wizPriorityCount = document.getElementById('wiz-priority-count');
+        var wizNotesInput = document.getElementById('wiz-notes');
+
+        // Summary elements
+        var summaryInputsBox = document.getElementById('summary-inputs-box');
+        var donutSvg = document.getElementById('budget-donut-svg');
+        var donutLegend = document.getElementById('budget-donut-legend');
+
+        // App Shell elements
+        var tabButtons = document.querySelectorAll('[data-tab]');
+        var tabPanels = document.querySelectorAll('.tab-panel');
+        var bellBtn = document.getElementById('bell-btn');
+        var bellPopover = document.getElementById('bell-popover');
+        var appEventTitle = document.getElementById('app-event-title');
+        var appCountdownPill = document.getElementById('app-countdown-pill');
+        var sidebarUserName = document.getElementById('sidebar-user-name');
+        var sidebarUserEmail = document.getElementById('sidebar-user-email');
+        var signoutBtn = document.getElementById('signout-btn');
+        var editEventBtn = document.getElementById('edit-event-btn');
+
+        // Dashboard live elements
+        var dashSubtitle = document.getElementById('dash-subtitle');
+        var dashCountdownVal = document.getElementById('dash-countdown-val');
+        var dashCountdownDesc = document.getElementById('dash-countdown-desc');
+        var dashHealthVal = document.getElementById('dash-health-val');
+        var dashHealthDesc = document.getElementById('dash-health-desc');
+        var dashTasksDesc = document.getElementById('dash-tasks-desc');
+        var dashBudgetVal = document.getElementById('dash-budget-val');
+        var dashBudgetSplits = document.getElementById('dash-budget-splits');
+        var dashRsvpVal = document.getElementById('dash-rsvp-val');
+        var dashRsvpDesc = document.getElementById('dash-rsvp-desc');
+        var budgetTabSplitList = document.getElementById('budget-tab-split-list');
+
+        /* ===================================================================
+           STATE
+           =================================================================== */
+        var landingSelectedType = 'Wedding';
+        var currentWizardStep = 1; // 1..4, 5 = summary
+        var isEditingExisting = false;
+        var wizardState = {
+          eventType: 'Wedding',
+          eventName: '',
+          hosts: '',
+          daysCount: 3,
+          functions: ['Haldi', 'Mehendi', 'Sangeet', 'Wedding', 'Reception'],
+          date: '',
+          city: 'Jaipur',
+          venueType: 'Hotel',
+          budget: 1500000,
+          guestCount: 200,
+          style: ['Traditional', 'Royal'],
+          food: 'Veg',
+          priorities: [],
+          notes: ''
+        };
+
+        /* ===================================================================
+           UTILITY HELPERS
+           =================================================================== */
+        function readStorage(key) {
+          try {
+            var raw = localStorage.getItem(key);
+            return raw ? JSON.parse(raw) : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function writeStorage(key, val) {
+          try {
+            localStorage.setItem(key, JSON.stringify(val));
+          } catch (e) {
+            // ignore storage quota errors
+          }
+        }
+
+        function formatINR(num) {
+          return '₹' + Math.round(Number(num) || 0).toLocaleString('en-IN');
+        }
+
+        function getTomorrowISO() {
+          var d = new Date();
+          d.setDate(d.getDate() + 1);
+          var yyyy = d.getFullYear();
+          var mm = String(d.getMonth() + 1).padStart(2, '0');
+          var dd = String(d.getDate()).padStart(2, '0');
+          return yyyy + '-' + mm + '-' + dd;
+        }
+
+        function computeDaysToGo(dateStr) {
+          if (!dateStr) return null;
+          var parts = dateStr.split('-');
+          if (parts.length !== 3) return null;
+          var target = new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2])
+          );
+          var now = new Date();
+          var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          var diffMs = target.getTime() - today.getTime();
+          return Math.round(diffMs / 86400000);
+        }
+
+        function escapeHtml(str) {
+          return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+        }
+
+        /* ===================================================================
+           VIEW ROUTER
+           =================================================================== */
+        function hideAllViews() {
+          [viewLanding, viewLogin, viewWizard, viewApp].forEach(function (v) {
+            v.classList.add('is-hidden');
+            v.setAttribute('aria-hidden', 'true');
+          });
+        }
+
+        function showView(viewEl, viewName) {
+          closeMobileDrawer();
+          closeBellPopover();
+          hideAllViews();
+          viewEl.classList.remove('is-hidden');
+          viewEl.setAttribute('aria-hidden', 'false');
+          if (viewName) {
+            try {
+              localStorage.setItem(LAST_VIEW_KEY, viewName);
+            } catch (e) {}
+          }
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+
+        function routeToPlanner() {
+          var user = readStorage(USER_KEY);
+          if (!user || !user.email) {
+            googleSigninPanel.classList.add('is-hidden');
+            googleFormError.classList.add('is-hidden');
+            showView(viewLogin, 'login');
+            return;
+          }
+
+          var evt = readStorage(EVENT_KEY);
+          if (!evt || !evt.eventName) {
+            openWizard(false);
+            return;
+          }
+
+          renderAppShell(user, evt);
+          showView(viewApp, 'app');
+        }
+
+        /* ===================================================================
+           LOGIN LOGIC
+           =================================================================== */
+        googleSigninBtn.addEventListener('click', function () {
+          var hidden = googleSigninPanel.classList.toggle('is-hidden');
+          if (!hidden) {
+            googleNameInput.focus();
+          }
+        });
+
+        googleSigninForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var name = googleNameInput.value.trim();
+          var email = googleEmailInput.value.trim();
+          if (!name || !email || email.indexOf('@') === -1) {
+            googleFormError.textContent = 'Please enter your name and a valid email address.';
+            googleFormError.classList.remove('is-hidden');
+            return;
+          }
+          googleFormError.classList.add('is-hidden');
+          writeStorage(USER_KEY, { name: name, email: email });
+          routeToPlanner();
+        });
+
+        guestSigninBtn.addEventListener('click', function () {
+          writeStorage(USER_KEY, {
+            name: 'Guest Host',
+            email: 'guest@utsav.ai'
+          });
+          routeToPlanner();
+        });
+
+        /* ===================================================================
+           BUDGET SPLIT CALCULATOR (+3% TO TOP 3 PRIORITIES)
+           =================================================================== */
+        function calculateBudgetSplit(eventType, budget, priorities) {
+          var base = DEFAULT_SPLITS[eventType] || DEFAULT_SPLITS.Other;
+          var pcts = {};
+          BUDGET_CATEGORIES.forEach(function (cat) {
+            pcts[cat] = base[cat];
+          });
+
+          var boostedSet = {};
+          (priorities || []).slice(0, 3).forEach(function (prio) {
+            var cat = PRIORITY_TO_CATEGORY[prio];
+            if (cat && !boostedSet[cat]) {
+              boostedSet[cat] = true;
+            }
+          });
+
+          var boostedKeys = Object.keys(boostedSet);
+          if (boostedKeys.length > 0) {
+            var totalShift = boostedKeys.length * 3;
+            var otherKeys = BUDGET_CATEGORIES.filter(function (cat) {
+              return !boostedSet[cat];
+            });
+            var reductionEach = totalShift / otherKeys.length;
+
+            boostedKeys.forEach(function (cat) {
+              pcts[cat] = Number((pcts[cat] + 3).toFixed(2));
+            });
+            otherKeys.forEach(function (cat) {
+              pcts[cat] = Number((pcts[cat] - reductionEach).toFixed(2));
+            });
+          }
+
+          var amounts = {};
+          var runningSum = 0;
+          var maxCat = BUDGET_CATEGORIES[0];
+          BUDGET_CATEGORIES.forEach(function (cat) {
+            var amt = Math.round((pcts[cat] / 100) * budget);
+            amounts[cat] = amt;
+            runningSum += amt;
+            if (amt > amounts[maxCat]) {
+              maxCat = cat;
+            }
+          });
+
+          // Ensure exact sum equals total budget
+          var diff = Math.round(budget) - runningSum;
+          if (diff !== 0) {
+            amounts[maxCat] += diff;
+          }
+
+          return { percentages: pcts, amounts: amounts };
+        }
+
+        /* ===================================================================
+           SVG DONUT CHART RENDERER (NO LIBRARY)
+           =================================================================== */
+        function renderDonutChart(percentages, amounts, totalBudget) {
+          var size = 210;
+          var cx = size / 2;
+          var cy = size / 2;
+          var r = 74;
+          var strokeWidth = 28;
+          var circumference = 2 * Math.PI * r;
+          var accumulated = 0;
+
+          var svgParts = [
+            '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#F8E1E7" stroke-width="' + strokeWidth + '"></circle>'
+          ];
+
+          var legendHtml = '';
+
+          BUDGET_CATEGORIES.forEach(function (cat) {
+            var pct = percentages[cat];
+            var segLen = (pct / 100) * circumference;
+            var dashOffset = -accumulated;
+            accumulated += segLen;
+            var color = CATEGORY_COLORS[cat];
+
+            svgParts.push(
+              '<circle cx="' +
+                cx +
+                '" cy="' +
+                cy +
+                '" r="' +
+                r +
+                '" fill="none" stroke="' +
+                color +
+                '" stroke-width="' +
+                strokeWidth +
+                '" stroke-dasharray="' +
+                segLen.toFixed(2) +
+                ' ' +
+                circumference.toFixed(2) +
+                '" stroke-dashoffset="' +
+                dashOffset.toFixed(2) +
+                '" transform="rotate(-90 ' +
+                cx +
+                ' ' +
+                cy +
+                ')"></circle>'
+            );
+
+            legendHtml +=
+              '<div class="donut-legend-item">' +
+              '<div class="donut-legend-left">' +
+              '<span class="donut-swatch" style="background-color:' +
+              color +
+              '"></span>' +
+              '<span>' +
+              escapeHtml(cat) +
+              '</span>' +
+              '</div>' +
+              '<div class="donut-legend-right tabular-nums">' +
+              pct.toFixed(1).replace(/\.0$/, '') +
+              '% &middot; ' +
+              formatINR(amounts[cat]) +
+              '</div>' +
+              '</div>';
+          });
+
+          svgParts.push(
+            '<text x="' +
+              cx +
+              '" y="' +
+              (cy - 6) +
+              '" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#66555B">Total Budget</text>'
+          );
+          svgParts.push(
+            '<text x="' +
+              cx +
+              '" y="' +
+              (cy + 14) +
+              '" text-anchor="middle" font-family="Playfair Display, serif" font-size="15" font-weight="700" fill="#2B2024">' +
+              formatINR(totalBudget) +
+              '</text>'
+          );
+
+          donutSvg.innerHTML = svgParts.join('');
+          donutLegend.innerHTML = legendHtml;
+        }
+
+        /* ===================================================================
+           WIZARD INITIALIZATION, PRE-FILL & NAVIGATION
+           =================================================================== */
+        function syncWizardDOMFromState() {
+          // Step 1
+          wizEventTypeBtns.forEach(function (btn) {
+            btn.classList.toggle(
+              'is-selected',
+              btn.getAttribute('data-wiz-type') === wizardState.eventType
+            );
+          });
+          wizEventNameInput.value = wizardState.eventName || '';
+          wizHostsInput.value = wizardState.hosts || '';
+          wizDaysInput.value = wizardState.daysCount || 1;
+          wizWeddingGroup.classList.toggle(
+            'is-hidden',
+            wizardState.eventType !== 'Wedding'
+          );
+          wizFunctionBtns.forEach(function (btn) {
+            var fn = btn.getAttribute('data-func');
+            btn.classList.toggle(
+              'is-selected',
+              wizardState.functions.indexOf(fn) !== -1
+            );
+          });
+
+          // Step 2
+          wizDateInput.setAttribute('min', getTomorrowISO());
+          wizDateInput.value = wizardState.date || '';
+          wizCitySelect.value = wizardState.city || 'Jaipur';
+          wizVenueBtns.forEach(function (btn) {
+            btn.classList.toggle(
+              'is-selected',
+              btn.getAttribute('data-venue') === wizardState.venueType
+            );
+          });
+          updateLiveCountdownInWizard();
+
+          // Step 3
+          wizBudgetSlider.value = wizardState.budget;
+          wizBudgetNum.value = wizardState.budget;
+          wizGuestsSlider.value = wizardState.guestCount;
+          wizGuestsNum.value = wizardState.guestCount;
+          updateLiveBudgetPerGuest();
+
+          // Step 4
+          wizStyleBtns.forEach(function (btn) {
+            btn.classList.toggle(
+              'is-selected',
+              wizardState.style.indexOf(btn.getAttribute('data-style')) !== -1
+            );
+          });
+          wizFoodBtns.forEach(function (btn) {
+            btn.classList.toggle(
+              'is-selected',
+              btn.getAttribute('data-food') === wizardState.food
+            );
+          });
+          renderPriorityChips();
+          wizNotesInput.value = wizardState.notes || '';
+        }
+
+        function openWizard(editing) {
+          isEditingExisting = Boolean(editing);
+          var user = readStorage(USER_KEY);
+          wizardUserLabel.textContent = user
+            ? 'Signed in as ' + user.name
+            : '';
+
+          var existing = readStorage(EVENT_KEY);
+          wizardCancelBtn.classList.toggle('is-hidden', !(isEditingExisting && existing));
+
+          if (isEditingExisting && existing) {
+            wizardState = {
+              eventType: existing.eventType || 'Wedding',
+              eventName: existing.eventName || '',
+              hosts: existing.hosts || '',
+              daysCount: existing.daysCount || (existing.functions ? existing.functions.length : 1),
+              functions: Array.isArray(existing.functions) ? existing.functions.slice() : [],
+              date: existing.date || '',
+              city: existing.city || 'Jaipur',
+              venueType: existing.venueType || 'Hotel',
+              budget: Number(existing.budget) || 1500000,
+              guestCount: Number(existing.guestCount) || 200,
+              style: Array.isArray(existing.style) ? existing.style.slice() : ['Traditional'],
+              food: existing.food || 'Veg',
+              priorities: Array.isArray(existing.priorities) ? existing.priorities.slice() : [],
+              notes: existing.notes || '',
+              createdAt: existing.createdAt
+            };
+          } else {
+            var defaultType = landingSelectedType || 'Wedding';
+            wizardState = {
+              eventType: defaultType,
+              eventName: '',
+              hosts: user && user.name !== 'Guest Host' ? user.name : '',
+              daysCount: defaultType === 'Wedding' ? 3 : 1,
+              functions:
+                defaultType === 'Wedding'
+                  ? ['Haldi', 'Mehendi', 'Sangeet', 'Wedding', 'Reception']
+                  : [defaultType],
+              date: '',
+              city: 'Jaipur',
+              venueType: 'Hotel',
+              budget: 1500000,
+              guestCount: 200,
+              style: ['Traditional', 'Royal'],
+              food: 'Veg',
+              priorities: [],
+              notes: ''
+            };
+          }
+
+          syncWizardDOMFromState();
+          clearWizardErrors();
+          setWizardStep(1);
+          showView(viewWizard, 'wizard');
+        }
+
+        function clearWizardErrors() {
+          [1, 2, 3, 4].forEach(function (n) {
+            var el = document.getElementById('wiz-error-' + n);
+            if (el) el.classList.add('is-hidden');
+          });
+        }
+
+        function showStepError(step, msg) {
+          var el = document.getElementById('wiz-error-' + step);
+          if (el) {
+            el.textContent = msg;
+            el.classList.remove('is-hidden');
+          }
+        }
+
+        function setWizardStep(step) {
+          currentWizardStep = step;
+          clearWizardErrors();
+
+          Object.keys(wizardPanes).forEach(function (k) {
+            wizardPanes[k].classList.toggle('is-hidden', Number(k) !== step);
+          });
+
+          var stepTitles = {
+            1: 'The Event',
+            2: 'When & Where',
+            3: 'Budget & Guests',
+            4: 'Preferences',
+            5: 'Summary & Budget Split'
+          };
+
+          var displayStep = step > 4 ? 4 : step;
+          wizardStepCounter.textContent =
+            step === 5 ? 'Step 4 of 4 · Review' : 'Step ' + step + ' of 4';
+          wizardStepTitleBadge.textContent = stepTitles[step];
+          wizardProgressFill.style.width = (displayStep / 4) * 100 + '%';
+
+          wizardStepLabels.forEach(function (lbl) {
+            var n = Number(lbl.getAttribute('data-step-label'));
+            lbl.classList.toggle('is-active', n === displayStep);
+            lbl.classList.toggle('is-done', n < displayStep || step === 5);
+          });
+
+          wizPrevBtn.style.visibility = step === 1 ? 'hidden' : 'visible';
+          wizNextBtn.classList.toggle('is-hidden', step === 5);
+          wizFinishBtn.classList.toggle('is-hidden', step !== 5);
+          wizNextBtn.textContent =
+            step === 4 ? 'Review Plan & Budget →' : 'Next →';
+
+          if (step === 5) {
+            renderSummaryAndChart();
+          }
+        }
+
+        function validateWizardStep(step) {
+          clearWizardErrors();
+
+          if (step === 1) {
+            wizardState.eventName = wizEventNameInput.value.trim();
+            wizardState.hosts = wizHostsInput.value.trim();
+            wizardState.daysCount = Math.max(1, Number(wizDaysInput.value) || 1);
+
+            if (!wizardState.eventName) {
+              showStepError(1, 'Please enter an event name (e.g. "Aarav & Meera\'s Wedding").');
+              wizEventNameInput.focus();
+              return false;
+            }
+            if (!wizardState.hosts) {
+              showStepError(1, 'Please enter the host name(s).');
+              wizHostsInput.focus();
+              return false;
+            }
+            if (wizardState.eventType === 'Wedding' && wizardState.functions.length === 0) {
+              showStepError(1, 'Please select at least one wedding function.');
+              return false;
+            }
+            if (wizardState.eventType !== 'Wedding') {
+              wizardState.functions = [wizardState.eventType];
+            }
+            return true;
+          }
+
+          if (step === 2) {
+            wizardState.date = wizDateInput.value;
+            wizardState.city = wizCitySelect.value;
+            var days = computeDaysToGo(wizardState.date);
+            if (days === null || days < 1) {
+              showStepError(2, 'Please pick an event date in the future.');
+              wizDateInput.focus();
+              return false;
+            }
+            return true;
+          }
+
+          if (step === 3) {
+            var b = Number(wizBudgetNum.value);
+            var g = Number(wizGuestsNum.value);
+            if (isNaN(b) || b < 50000 || b > 10000000) {
+              showStepError(3, 'Budget must be between ₹50,000 and ₹1,00,00,000.');
+              return false;
+            }
+            if (isNaN(g) || g < 10 || g > 2000) {
+              showStepError(3, 'Guest count must be between 10 and 2,000.');
+              return false;
+            }
+            wizardState.budget = b;
+            wizardState.guestCount = g;
+            return true;
+          }
+
+          if (step === 4) {
+            wizardState.notes = wizNotesInput.value.trim();
+            if (wizardState.style.length === 0) {
+              showStepError(4, 'Please pick at least one style preference.');
+              return false;
+            }
+            if (wizardState.priorities.length !== 3) {
+              showStepError(4, 'Please select your top 3 priorities so Shubh can tune your budget split.');
+              return false;
+            }
+            return true;
+          }
+
+          return true;
+        }
+
+        function renderSummaryAndChart() {
+          var days = computeDaysToGo(wizardState.date);
+          var split = calculateBudgetSplit(
+            wizardState.eventType,
+            wizardState.budget,
+            wizardState.priorities
+          );
+          wizardState.budgetSplit = split.amounts;
+
+          var rows = [
+            ['Event', wizardState.eventName + ' (' + wizardState.eventType + ')'],
+            ['Hosts', wizardState.hosts],
+            [
+              'Schedule',
+              (wizardState.date || '—') +
+                (days !== null ? ' · D-' + days + ' to go' : '')
+            ],
+            ['Location', wizardState.city + ' · ' + wizardState.venueType],
+            ['Functions', wizardState.functions.join(', ') || wizardState.eventType],
+            ['Budget', formatINR(wizardState.budget)],
+            [
+              'Guests',
+              wizardState.guestCount +
+                ' (' +
+                formatINR(Math.round(wizardState.budget / wizardState.guestCount)) +
+                ' / guest)'
+            ],
+            ['Style & Food', wizardState.style.join(', ') + ' · ' + wizardState.food],
+            [
+              'Top 3 Priorities',
+              wizardState.priorities
+                .map(function (p, idx) {
+                  return idx + 1 + '. ' + p;
+                })
+                .join(' · ')
+            ]
+          ];
+
+          if (wizardState.notes) {
+            rows.push(['Notes for Shubh', wizardState.notes]);
+          }
+
+          summaryInputsBox.innerHTML = rows
+            .map(function (r) {
+              return (
+                '<div class="summary-row">' +
+                '<span class="summary-key">' +
+                escapeHtml(r[0]) +
+                '</span>' +
+                '<span class="summary-val">' +
+                escapeHtml(r[1]) +
+                '</span>' +
+                '</div>'
+              );
+            })
+            .join('');
+
+          renderDonutChart(split.percentages, split.amounts, wizardState.budget);
+        }
+
+        /* ===================================================================
+           WIZARD FIELD INTERACTIONS
+           =================================================================== */
+        wizEventTypeBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var type = btn.getAttribute('data-wiz-type');
+            wizardState.eventType = type;
+            wizEventTypeBtns.forEach(function (b) {
+              b.classList.toggle('is-selected', b === btn);
+            });
+            wizWeddingGroup.classList.toggle('is-hidden', type !== 'Wedding');
+            if (type === 'Wedding' && wizardState.functions.length === 0) {
+              wizardState.functions = ['Haldi', 'Mehendi', 'Sangeet', 'Wedding', 'Reception'];
+              wizFunctionBtns.forEach(function (fb) {
+                fb.classList.add('is-selected');
+              });
+            }
+          });
+        });
+
+        wizFunctionBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var fn = btn.getAttribute('data-func');
+            var idx = wizardState.functions.indexOf(fn);
+            if (idx === -1) {
+              wizardState.functions.push(fn);
+              btn.classList.add('is-selected');
+            } else {
+              wizardState.functions.splice(idx, 1);
+              btn.classList.remove('is-selected');
+            }
+          });
+        });
+
+        function updateLiveCountdownInWizard() {
+          var days = computeDaysToGo(wizDateInput.value);
+          if (days === null) {
+            wizLiveCountdown.textContent = 'Select a future date';
+          } else if (days < 1) {
+            wizLiveCountdown.textContent = 'Date must be in the future';
+          } else {
+            wizLiveCountdown.textContent = 'D-' + days + ' to go';
+          }
+        }
+
+        wizDateInput.addEventListener('change', updateLiveCountdownInWizard);
+        wizDateInput.addEventListener('input', updateLiveCountdownInWizard);
+
+        wizVenueBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            wizardState.venueType = btn.getAttribute('data-venue');
+            wizVenueBtns.forEach(function (b) {
+              b.classList.toggle('is-selected', b === btn);
+            });
+          });
+        });
+
+        function updateLiveBudgetPerGuest() {
+          var b = Number(wizBudgetNum.value) || 50000;
+          var g = Math.max(10, Number(wizGuestsNum.value) || 10);
+          wizBudgetFormatted.textContent = 'Selected budget: ' + formatINR(b);
+          wizPerGuest.textContent =
+            'Budget per guest: ' + formatINR(Math.round(b / g));
+        }
+
+        wizBudgetSlider.addEventListener('input', function () {
+          wizBudgetNum.value = wizBudgetSlider.value;
+          updateLiveBudgetPerGuest();
+        });
+
+        wizBudgetNum.addEventListener('input', function () {
+          var v = Number(wizBudgetNum.value);
+          if (!isNaN(v)) {
+            wizBudgetSlider.value = Math.min(10000000, Math.max(50000, v));
+          }
+          updateLiveBudgetPerGuest();
+        });
+
+        wizGuestsSlider.addEventListener('input', function () {
+          wizGuestsNum.value = wizGuestsSlider.value;
+          updateLiveBudgetPerGuest();
+        });
+
+        wizGuestsNum.addEventListener('input', function () {
+          var v = Number(wizGuestsNum.value);
+          if (!isNaN(v)) {
+            wizGuestsSlider.value = Math.min(2000, Math.max(10, v));
+          }
+          updateLiveBudgetPerGuest();
+        });
+
+        wizStyleBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var s = btn.getAttribute('data-style');
+            var idx = wizardState.style.indexOf(s);
+            if (idx === -1) {
+              wizardState.style.push(s);
+              btn.classList.add('is-selected');
+            } else {
+              wizardState.style.splice(idx, 1);
+              btn.classList.remove('is-selected');
+            }
+          });
+        });
+
+        wizFoodBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            wizardState.food = btn.getAttribute('data-food');
+            wizFoodBtns.forEach(function (b) {
+              b.classList.toggle('is-selected', b === btn);
+            });
+          });
+        });
+
+        function renderPriorityChips() {
+          wizPriorityBtns.forEach(function (btn) {
+            var p = btn.getAttribute('data-priority');
+            var rankIdx = wizardState.priorities.indexOf(p);
+            btn.classList.toggle('is-selected', rankIdx !== -1);
+            var existingBadge = btn.querySelector('.priority-rank-badge');
+            if (existingBadge) existingBadge.remove();
+            if (rankIdx !== -1) {
+              var badge = document.createElement('span');
+              badge.className = 'priority-rank-badge';
+              badge.textContent = String(rankIdx + 1);
+              btn.appendChild(badge);
+            }
+          });
+          wizPriorityCount.textContent =
+            '(' + wizardState.priorities.length + ' / 3 selected)';
+        }
+
+        wizPriorityBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var p = btn.getAttribute('data-priority');
+            var idx = wizardState.priorities.indexOf(p);
+            if (idx !== -1) {
+              wizardState.priorities.splice(idx, 1);
+            } else if (wizardState.priorities.length < 3) {
+              wizardState.priorities.push(p);
+            } else {
+              wizardState.priorities.shift();
+              wizardState.priorities.push(p);
+            }
+            renderPriorityChips();
+          });
+        });
+
+        wizPrevBtn.addEventListener('click', function () {
+          if (currentWizardStep > 1) {
+            setWizardStep(currentWizardStep - 1);
+          }
+        });
+
+        wizNextBtn.addEventListener('click', function () {
+          if (validateWizardStep(currentWizardStep)) {
+            setWizardStep(currentWizardStep + 1);
+          }
+        });
+
+        wizFinishBtn.addEventListener('click', function () {
+          var split = calculateBudgetSplit(
+            wizardState.eventType,
+            wizardState.budget,
+            wizardState.priorities
+          );
+          var eventProfile = {
+            eventType: wizardState.eventType,
+            eventName: wizardState.eventName,
+            hosts: wizardState.hosts,
+            daysCount: wizardState.daysCount,
+            functions: wizardState.functions,
+            date: wizardState.date,
+            city: wizardState.city,
+            venueType: wizardState.venueType,
+            budget: wizardState.budget,
+            guestCount: wizardState.guestCount,
+            style: wizardState.style,
+            food: wizardState.food,
+            priorities: wizardState.priorities,
+            notes: wizardState.notes,
+            budgetSplit: split.amounts,
+            createdAt: wizardState.createdAt || new Date().toISOString()
+          };
+
+          writeStorage(EVENT_KEY, eventProfile);
+          var user = readStorage(USER_KEY) || {
+            name: 'Guest Host',
+            email: 'guest@utsav.ai'
+          };
+          renderAppShell(user, eventProfile);
+          showView(viewApp, 'app');
+        });
+
+        wizardCancelBtn.addEventListener('click', function () {
+          var user = readStorage(USER_KEY);
+          var evt = readStorage(EVENT_KEY);
+          if (user && evt) {
+            renderAppShell(user, evt);
+            showView(viewApp, 'app');
+          }
+        });
+
+        /* ===================================================================
+           APP SHELL HYDRATION
+           =================================================================== */
+        function renderAppShell(user, evt) {
+          sidebarUserName.textContent = user.name || 'Guest Host';
+          sidebarUserEmail.textContent = user.email || 'guest@utsav.ai';
+
+          appEventTitle.textContent = evt.eventName || "Aarav & Meera's Wedding";
+          var days = computeDaysToGo(evt.date);
+          var countdownText =
+            days !== null && days >= 0 ? 'D-' + days + ' to go' : 'D-0 to go';
+          appCountdownPill.textContent = countdownText;
+
+          // Hydrate Dashboard placeholder summaries with persisted eventProfile
+          dashSubtitle.textContent =
+            evt.eventType +
+            ' in ' +
+            evt.city +
+            ' (' +
+            evt.venueType +
+            ') · Hosted by ' +
+            evt.hosts;
+          dashCountdownVal.textContent = countdownText;
+          dashCountdownDesc.textContent =
+            'Target date: ' +
+            evt.date +
+            ' · Functions: ' +
+            (evt.functions || []).join(', ');
+          dashHealthVal.textContent = (evt.priorities || []).slice(0, 3).join(', ') || 'On Track';
+          dashHealthDesc.textContent =
+            'Style: ' +
+            (evt.style || []).join(', ') +
+            ' · Dining: ' +
+            evt.food;
+          dashTasksDesc.textContent =
+            evt.notes
+              ? 'Note for Shubh: "' + evt.notes + '"'
+              : 'Prioritized to-dos for this week assigned across hosts and family coordinators.';
+          dashBudgetVal.textContent = formatINR(evt.budget);
+          dashRsvpVal.textContent = evt.guestCount + ' Expected Guests';
+          dashRsvpDesc.textContent =
+            'Budget per guest: ' +
+            formatINR(Math.round(evt.budget / Math.max(1, evt.guestCount))) +
+            ' · Catering preference: ' +
+            evt.food;
+
+          var splitEntries = Object.keys(evt.budgetSplit || {});
+          dashBudgetSplits.innerHTML = splitEntries
+            .slice(0, 4)
+            .map(function (cat) {
+              return (
+                '<div class="mini-split-row"><span>' +
+                escapeHtml(cat) +
+                '</span><strong class="tabular-nums">' +
+                formatINR(evt.budgetSplit[cat]) +
+                '</strong></div>'
+              );
+            })
+            .join('');
+
+          budgetTabSplitList.innerHTML = splitEntries
+            .map(function (cat) {
+              return (
+                '<div class="mini-split-row"><span>' +
+                escapeHtml(cat) +
+                '</span><strong class="tabular-nums">' +
+                formatINR(evt.budgetSplit[cat]) +
+                '</strong></div>'
+              );
+            })
+            .join('');
+        }
+
+        /* ===================================================================
+           SHARED EVENT LISTENERS (LANDING, APP TABS, BELL, HAMBURGER)
+           =================================================================== */
+        function closeMobileDrawer() {
+          mobileDrawer.classList.remove('is-open');
+          mobileDrawer.setAttribute('aria-hidden', 'true');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        startButtons.forEach(function (btn) {
+          btn.addEventListener('click', routeToPlanner);
+        });
+
+        backButtons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            showView(viewLanding, 'landing');
+          });
+        });
+
+        if (sidebarLogoBtn) {
+          sidebarLogoBtn.addEventListener('click', function () {
+            showView(viewLanding, 'landing');
+          });
+        }
+
+        if (signoutBtn) {
+          signoutBtn.addEventListener('click', function () {
+            try {
+              localStorage.removeItem(USER_KEY);
+            } catch (e) {}
+            googleSigninPanel.classList.add('is-hidden');
+            showView(viewLogin, 'login');
+          });
+        }
+
+        if (editEventBtn) {
+          editEventBtn.addEventListener('click', function () {
+            openWizard(true);
+          });
+        }
+
+        hamburgerBtn.addEventListener('click', function () {
+          var isOpen = mobileDrawer.classList.toggle('is-open');
+          mobileDrawer.setAttribute('aria-hidden', String(!isOpen));
+          hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        drawerLinks.forEach(function (link) {
+          link.addEventListener('click', closeMobileDrawer);
+        });
+
+        eventChips.forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            var type = chip.getAttribute('data-event');
+            if (!type || !eventBlueprints[type]) return;
+            landingSelectedType = type;
+
+            eventChips.forEach(function (c) {
+              var active = c === chip;
+              c.classList.toggle('is-active', active);
+              c.setAttribute('aria-selected', String(active));
+            });
+
+            eventPreviewTitle.textContent = eventBlueprints[type].title;
+            eventPreviewCopy.textContent = eventBlueprints[type].copy;
+          });
+        });
+
+        function activateTab(tabId) {
+          tabButtons.forEach(function (btn) {
+            var isMatch = btn.getAttribute('data-tab') === tabId;
+            btn.classList.toggle('is-active', isMatch);
+            btn.setAttribute('aria-selected', String(isMatch));
+          });
+
+          tabPanels.forEach(function (panel) {
+            panel.classList.toggle('is-active', panel.id === 'panel-' + tabId);
+          });
+        }
+
+        tabButtons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var tabId = btn.getAttribute('data-tab');
+            if (tabId) activateTab(tabId);
+          });
+        });
+
+        function closeBellPopover() {
+          bellPopover.classList.add('is-hidden');
+          bellBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        bellBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isHidden = bellPopover.classList.toggle('is-hidden');
+          bellBtn.setAttribute('aria-expanded', String(!isHidden));
+        });
+
+        document.addEventListener('click', function (e) {
+          if (
+            !bellPopover.classList.contains('is-hidden') &&
+            !bellPopover.contains(e.target) &&
+            e.target !== bellBtn
+          ) {
+            closeBellPopover();
+          }
+        });
+
+        var revealNodes = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+          );
+          revealNodes.forEach(function (node) {
+            observer.observe(node);
+          });
+        } else {
+          revealNodes.forEach(function (node) {
+            node.classList.add('is-visible');
+          });
+        }
+
+        /* ===================================================================
+           BOOT — RESTORE PERSISTED SESSION FROM localStorage
+           =================================================================== */
+        (function init() {
+          var savedUser = readStorage(USER_KEY);
+          var savedEvent = readStorage(EVENT_KEY);
+          var lastView = null;
+          try {
+            lastView = localStorage.getItem(LAST_VIEW_KEY);
+          } catch (e) {}
+
+          if (savedUser && savedEvent && lastView !== 'landing') {
+            renderAppShell(savedUser, savedEvent);
+            showView(viewApp, 'app');
+          } else if (savedUser && !savedEvent && lastView && lastView !== 'landing') {
+            openWizard(false);
+          } else {
+            showView(viewLanding, 'landing');
+          }
+        })();
+      })();
+    </script>
+  </body>
+</html>
